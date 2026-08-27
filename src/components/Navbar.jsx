@@ -8,6 +8,7 @@ function Navbar() {
       {user 
       ? 
       (<>
+      <Link to='/recommend'>Recommendations</Link>
       <button onClick={logout}>Sign Out</button>
       </>) : 
       (<>
