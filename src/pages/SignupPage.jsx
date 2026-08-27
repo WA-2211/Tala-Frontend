@@ -7,12 +7,13 @@ function Signup() {
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     username: "",
+    email: "",
     password: "",
     passwordConf: "",
   });
   const [ submitting, setSubmitting ] = useState(false)
 
-  const { username, password, passwordConf } = formData;
+  const { username,email, password, passwordConf } = formData;
 
   function handleChange(event){
     setError("");
@@ -34,7 +35,7 @@ function Signup() {
   }
 
   function isFormInvalid(){
-    return !(username && password && password === passwordConf);
+    return !(username && email && password && password === passwordConf);
   };
 
   return (
@@ -54,9 +55,24 @@ function Signup() {
           />
         </div>
         <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            placeholder="user@example.com"
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address!"
+            id="email"
+            value={email}
+            name="email"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must be a minimum of 8 characters and include at least one number, as well as both uppercase and lowercase letters!"
             id="password"
             value={password}
             name="password"
