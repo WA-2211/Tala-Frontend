@@ -58,7 +58,7 @@ function Signup() {
           <label htmlFor="email">Email:</label>
           <input
             type="email"
-            placeholder="user@example.com"
+            placeholder="example@domain.com"
             pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address!"
             id="email"
             value={email}

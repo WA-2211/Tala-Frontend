@@ -1,7 +1,7 @@
 // src/components/SignInForm/SignInForm.jsx
 
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 import { signIn } from '../services/authService';
 import { useAuth } from '../context/AuthContext';
@@ -12,7 +12,7 @@ const SignInForm = ({}) => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   });
 
@@ -24,15 +24,11 @@ const SignInForm = ({}) => {
 
   async function handleSubmit(event){
     event.preventDefault();
-
-  }
-  async function handleSubmit(event){
-    event.preventDefault();
     try {
       const signedInUser = await signIn(formData);
 
       setUser(signedInUser);
-      navigate('/dashboard');
+      navigate('/recommended');
     } catch (err) {
       console.log(`Error: ${err}`)
       setError(err?.response?.data?.message);
@@ -45,13 +41,14 @@ const SignInForm = ({}) => {
       <p className='error'>{error}</p>
       <form autoComplete='off' onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='email'>Username:</label>
+          <label htmlFor='email'>Email:</label>
           <input
             type='text'
             autoComplete='off'
-            id='username'
-            value={formData.username}
-            name='username'
+            id='email'
+            placeholder='example@domain.com'
+            value={formData.email}
+            name='email'
             onChange={handleChange}
             required
           />
@@ -70,6 +67,7 @@ const SignInForm = ({}) => {
         </div>
         <div>
           <button>Sign In</button>
+          
           <button onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
