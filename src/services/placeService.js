@@ -5,6 +5,11 @@ async function getRecommendation(){
     return res.data
 }
 
+async function getAllPlaces(){
+    const res = await api.get('/place')
+    return res.data
+}
 export{
-    getRecommendation
+    getRecommendation,
+    getAllPlaces
 }
