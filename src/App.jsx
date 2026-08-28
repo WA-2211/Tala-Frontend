@@ -6,6 +6,7 @@ import Homepage from "./pages/Homepage";
 import SignInPage from "./pages/SigninPage";
 import Recommendation from "./pages/place/Recommendation";
 import BrowsePlaces from './pages/place/Allplaces'
+import PlaceDetails from "./pages/place/PlaceDetails";
 import Dashboard from "./pages/Dashboard";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
@@ -20,6 +21,7 @@ function App() {
         <Route path="/sign-up" element={<SignupPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/place" element={<BrowsePlaces />}/>
+        <Route path="/place/:placeId" element={<PlaceDetails />}/>
         <Route path="/recommended" element={<ProtectedRoute><Recommendation /></ProtectedRoute>} />
 
       </Routes>

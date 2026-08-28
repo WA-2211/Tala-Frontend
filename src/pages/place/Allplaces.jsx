@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin } from 'antd'
 import { getAllPlaces } from '../../services/placeService'
@@ -43,12 +43,10 @@ function Allplaces() {
             <h1>Where To Go?</h1>
             {places.map((onePlace) => 
             <div key={onePlace._id}>
-                <h3>{onePlace.name}</h3>
-                <p>{onePlace.description}</p>
-                <p>Category: {onePlace.category}</p>
-                <p>Price Range: {onePlace.priceRange.category} , {onePlace.priceRange.averageBHD}BHD average</p>
-                <p>Place Rating: {onePlace.ratingAvg}★</p>
+             <h3><Link to={`/place/${onePlace._id}`}>{onePlace.name}</Link></h3>
                 <p>{onePlace.tags.join(' / ')} </p>
+                <p>{onePlace.description}</p>
+                <p>Price Range: {onePlace.priceRange.category} , {onePlace.priceRange.averageBHD}BHD average</p>
 
             </div>
             )}
