@@ -16,13 +16,8 @@ async function getOnePlace(placeId) {
 
 }
 
-async function getReview(placeId) {
-    const res = await api.get('/place/' + placeId +'/review')
-    return res.data
-}
 export{
     getRecommendation,
     getAllPlaces,
-    getOnePlace,
-    getReview
+    getOnePlace
 }

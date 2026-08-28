@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Rate } from 'antd'
-import { getOnePlace, getReview } from '../../services/placeService'
+import { getOnePlace } from '../../services/placeService'
+import { getReview } from '../../services/reviewService'
 function PlaceDetails() {
 
     const navigate = useNavigate()
