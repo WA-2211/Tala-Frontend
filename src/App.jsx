@@ -10,6 +10,7 @@ import PlaceDetails from "./pages/place/PlaceDetails";
 import VisitPlace from "./pages/visit/VisitPlace";
 import FavoritePlaces from "./pages/favorite/FavoritePlaces";
 import AllPlans from "./pages/plan/AllPlans";
+import PlanDetails from "./pages/plan/PlanDetails";
 import Dashboard from "./pages/Dashboard";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
@@ -29,6 +30,7 @@ function App() {
         <Route path="/visit" element={<ProtectedRoute><VisitPlace/></ProtectedRoute>}/>
         <Route path="/favorite" element={<ProtectedRoute><FavoritePlaces/></ProtectedRoute>}/>
         <Route path="/plan" element={<ProtectedRoute><AllPlans/></ProtectedRoute>}/>
+        <Route path="/plan/:planId" element={<ProtectedRoute><PlanDetails/></ProtectedRoute>}/>
       </Routes>
     </div>
   );
