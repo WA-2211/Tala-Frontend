@@ -5,6 +5,19 @@ async function getRecommendation(){
     return res.data
 }
 
+async function getAllPlaces(){
+    const res = await api.get('/place')
+    return res.data
+}
+
+async function getOnePlace(placeId) {
+    const res = await api.get('/place/' + placeId)
+    return res.data
+
+}
+
 export{
-    getRecommendation
+    getRecommendation,
+    getAllPlaces,
+    getOnePlace
 }
