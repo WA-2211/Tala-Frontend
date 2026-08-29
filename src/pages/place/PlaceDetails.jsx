@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Rate } from 'antd'
 import { getOnePlace } from '../../services/placeService'
 import { getReview } from '../../services/reviewService'
+import { addToFavorite, getAllFavorites, deleteFavorite } from '../../services/favoriteService'
 function PlaceDetails() {
 
     const navigate = useNavigate()
@@ -14,18 +15,45 @@ function PlaceDetails() {
     const [reviews, setReviews] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [favorite, setFavorite] = useState(false)
+    const [favoriteId, setFavoriteId] = useState(null)
+
+    async function handleFavorite() {
+        try {
+            if (favorite) {
+                 await deleteFavorite(favoriteId)
+                setFavorite(false)
+                setFavoriteId(null)
+             }
+            else {
+                const favoritePlace = await addToFavorite(placeId)
+                setFavorite(true)
+                setFavoriteId(favoritePlace._id)
+            }
+
+        } catch (err) {
+            setError(err?.response?.data?.message)
+
+        }
+    }
 
     async function loadData() {
         try {
             setLoading(true)
             setError(false)
 
-            const [resPlace, resReview] = await Promise.all([
+            const [resPlace, resReview, resFavorite] = await Promise.all([
                 getOnePlace(placeId),
-                getReview(placeId)
+                getReview(placeId),
+                getAllFavorites()
             ])
             setPlace(resPlace)
             setReviews(resReview)
+            const foundFavorite = resFavorite.find((oneFavorite) => oneFavorite.place._id === placeId)
+            if (foundFavorite) {
+                setFavorite(true)
+                setFavoriteId(foundFavorite._id)
+            }
 
         } catch (err) {
             setError(err?.response?.data?.message)
@@ -41,6 +69,7 @@ function PlaceDetails() {
         loadData()
     }, [placeId])
 
+
     if (loading) return <Flex align='center' gap='medium' justify='center'>
         <Spin size='large' description='Loading...' />
     </Flex>
@@ -51,7 +80,7 @@ function PlaceDetails() {
             {place && (
                 <>
                     <h1>{place.name}</h1>
-                    <button>Favorite Place</button>
+                    <button onClick={handleFavorite}>{favorite?'Unfavorite Place' :"Favorite Place"}</button>
                     <button>Visit Place</button>
                     <p>{place.category}</p>
                     <p>{place.tags?.join(' / ')}</p>
@@ -64,7 +93,7 @@ function PlaceDetails() {
                             <h3>Recent Reviews</h3>
                             <p>{oneReview.user?.username}</p>
                             <Flex align='center' gap='small'>
-                                <Rate allowHalf disabled value={place.ratingAvg}/>
+                                <Rate allowHalf disabled value={place.ratingAvg} />
                                 <span>{place.ratingAvg} / 5</span>
                             </Flex>
                             <p>{oneReview.reviewText}</p>
