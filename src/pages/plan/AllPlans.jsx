@@ -23,21 +23,8 @@ function AllPlans() {
         minute: '2-digit'
 
     }
-    const [copied, setCopied] = useState(null)
 
-    async function handleCopy(planId, shareUrlLink){
-        try {
-            await navigator.clipboard.writeText(shareUrlLink)
-            setCopied(planId)
-    
-            setTimeout(() =>{
-                setCopied(null)
-            },2000)
-            
-        } catch (err) {
-            console.error(err)
-        }
-    }
+
 
     async function loadPlans() {
         try {
@@ -81,12 +68,9 @@ function AllPlans() {
                         <span>
                             <Paragraph  copyable={{text: shareUrlLink}}>
                             {shareUrlLink}
-
                             </Paragraph >
-
-                            </span>
-                        <button onClick={() => handleCopy(onePlan._id, shareUrlLink)}>{copied === onePlan._id? 'Copied to clipboard!':'Copy'}</button>
-
+                        </span>
+                        
                     </div>
                 )}
                 )}
