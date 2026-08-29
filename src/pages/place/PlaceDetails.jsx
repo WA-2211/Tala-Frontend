@@ -4,9 +4,10 @@ import { useParams, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Rate } from 'antd'
 import { getOnePlace } from '../../services/placeService'
-import { getReview } from '../../services/reviewService'
+import { getReview, createReview } from '../../services/reviewService'
 import { addToFavorite, getAllFavorites, deleteFavorite } from '../../services/favoriteService'
 import { createVisit, getAllVisits } from '../../services/visitService'
+
 
 function PlaceDetails() {
 
@@ -22,6 +23,11 @@ function PlaceDetails() {
     const [favoriteId, setFavoriteId] = useState(null)
     const [visit, setVisit] = useState(false)
     const [coolDown, setCoolDown] = useState(null)
+    const [reviewForm, setReviewForm] = useState(false)
+    const [reviewFormData, setReviewFormData] = useState({
+        rating:'',
+        reviewText:''
+    })
 
     async function handleFavorite() {
         try {
@@ -55,21 +61,64 @@ function PlaceDetails() {
 
         }
     }
+
+        function handleChange(event){
+        const { name, type, value, checked } = event.target;
+
+    setReviewFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  }
+    
+    function handleShowReviewForm(){
+            setReviewForm(true)
+    }
+
+        function handleHideReviewForm(){
+            setReviewForm(false)
+   
+    }
+
+   async function handleSubmit(event){
+        try {
+            event.preventDefault()
+            const res = await createReview(placeId, reviewFormData)
+            setReviewFormData({
+                rating:'',
+                reviewText:''
+            })
+            setReviews([...reviews, res])
+            getReview(placeId)
+            setReviewForm(false)
+            
+        } catch (err) {
+            setVisitError(err?.response?.data?.message)
+            
+        }
+    }
+
+
+  
     async function loadData() {
         try {
             setLoading(true)
             setError(false)
 
-            const [resPlace, resReview, resFavorite, resVisit] = await Promise.all([
+            const [resPlace, resReview] = await Promise.all([
                 getOnePlace(placeId),
-                getReview(placeId),
-                getAllFavorites(),
-                getAllVisits()
+                getReview(placeId)
             ])
 
             setPlace(resPlace)
             setReviews(resReview)
 
+            if(user){
+                const [resFavorite, resVisit] = await Promise.all([
+
+                getAllFavorites(),
+                getAllVisits()
+            ])
             const foundFavorite = resFavorite.find((oneFavorite) => oneFavorite.place._id === placeId)
             if (foundFavorite) {
                 setFavorite(true)
@@ -80,6 +129,7 @@ function PlaceDetails() {
                 setVisit(true)
                 setCoolDown(foundVisit.coolDownUntil)
             }
+        }
 
 
         } catch (err) {
@@ -89,6 +139,7 @@ function PlaceDetails() {
             setLoading(false)
         }
     }
+
 
 
 
@@ -107,22 +158,67 @@ function PlaceDetails() {
             {place && (
                 <>
                     <h1>{place.name}</h1>
+                    {user && (
+                        <>
                     <button onClick={handleFavorite}>{favorite?'Unfavorite Place' :"Favorite Place"}</button>
-                    <button onClick={handleVisit} disabled={visit}>{visit? `On cooldown until ${new Date(coolDown).toLocaleDateString()}`:'Visit Place'}</button>
+                    <button onClick={handleVisit} disabled={visit}>
+                        {visit? `On cooldown until ${new Date(coolDown).toLocaleDateString()}`:'Visit Place'}
+                    </button>
+                        </>
+                    )}
                     <p>{visitError}</p>
                     <p>{place.category}</p>
                     <p>{place.tags?.join(' / ')}</p>
                     <p>{place.description}</p>
                     <p>{place.priceRange?.category} , {place.priceRange?.averageBHD}BHD average</p>
                     <p>{place.ratingAvg} / 5</p>
-                    <button>Add Review</button>
+                    <hr></hr>
+
+                    
+                    <button onClick={handleShowReviewForm} disabled={!user}>{user?'Add Review':'Sign in to add review'}</button>
+                    {reviewForm && (
+                        <>
+                        <form onSubmit={handleSubmit}>
+                        <div>
+                            <label htmlFor='rating'>Your Rating</label>
+                            <input 
+                            type='number'
+                            name='rating'
+                            id='rating'
+                            value={reviewFormData.rating}
+                            autoComplete='off'
+                            onChange={handleChange}
+                            required
+                             />
+                        </div>
+
+                        <div>
+                            <label htmlFor='reviewText'>Place Review</label>
+                            <textarea
+                            id='reviewText'
+                            name='reviewText'
+                            value={reviewFormData.reviewText}
+                            autoComplete='off'
+                            onChange={handleChange}
+                            ></textarea>
+                        </div>  
+
+                        <div>
+                            <button type='button' onClick={handleHideReviewForm}>Cancel</button>
+                            <button type='submit'>Submit</button>
+
+                        </div>                      
+                    </form>
+                        </>
+                    )}
+                    
+                    <h3>Recent Reviews</h3>
                     {reviews.map((oneReview) =>
                         <div key={oneReview._id}>
-                            <h3>Recent Reviews</h3>
                             <p>{oneReview.user?.username}</p>
                             <Flex align='center' gap='small'>
-                                <Rate allowHalf disabled value={place.ratingAvg} />
-                                <span>{place.ratingAvg} / 5</span>
+                                <Rate allowHalf disabled value={oneReview.rating} />
+                                <span>{oneReview.rating} / 5</span>
                             </Flex>
                             <p>{oneReview.reviewText}</p>
                         </div>

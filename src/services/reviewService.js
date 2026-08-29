@@ -5,6 +5,12 @@ async function getReview(placeId) {
     return res.data
 }
 
+async function createReview(placeId, body){
+    const res = await api.post('/place/' + placeId + '/review', {...body, place:placeId})
+    return res.data
+}
+
 export {
-    getReview
+    getReview,
+    createReview
 }
