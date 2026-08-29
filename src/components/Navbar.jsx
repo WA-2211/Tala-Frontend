@@ -10,6 +10,8 @@ function Navbar() {
       (<>
       <Link to='/place'>View Places</Link>
       <Link to='/recommended'>Recommendations</Link>
+      <Link to='/visit'>Vist History</Link>
+
       <button onClick={logout}>Sign Out</button>
       </>) : 
       (<>
