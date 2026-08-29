@@ -6,6 +6,8 @@ import { Flex, Spin, Rate } from 'antd'
 import { getOnePlace } from '../../services/placeService'
 import { getReview } from '../../services/reviewService'
 import { addToFavorite, getAllFavorites, deleteFavorite } from '../../services/favoriteService'
+import { createVisit, getAllVisits } from '../../services/visitService'
+
 function PlaceDetails() {
 
     const navigate = useNavigate()
@@ -15,8 +17,11 @@ function PlaceDetails() {
     const [reviews, setReviews] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [visitError, setVisitError] = useState('')
     const [favorite, setFavorite] = useState(false)
     const [favoriteId, setFavoriteId] = useState(null)
+    const [visit, setVisit] = useState(false)
+    const [coolDown, setCoolDown] = useState(null)
 
     async function handleFavorite() {
         try {
@@ -37,23 +42,45 @@ function PlaceDetails() {
         }
     }
 
+    async function handleVisit(){
+        try {
+      
+              const createdVisit = await createVisit(placeId)
+                setVisit(true)
+                setCoolDown(createdVisit.coolDownUntil)
+                setVisitError('')
+            }
+         catch (err) {
+            setVisitError(err?.response?.data?.message)
+
+        }
+    }
     async function loadData() {
         try {
             setLoading(true)
             setError(false)
 
-            const [resPlace, resReview, resFavorite] = await Promise.all([
+            const [resPlace, resReview, resFavorite, resVisit] = await Promise.all([
                 getOnePlace(placeId),
                 getReview(placeId),
-                getAllFavorites()
+                getAllFavorites(),
+                getAllVisits()
             ])
+
             setPlace(resPlace)
             setReviews(resReview)
+
             const foundFavorite = resFavorite.find((oneFavorite) => oneFavorite.place._id === placeId)
             if (foundFavorite) {
                 setFavorite(true)
                 setFavoriteId(foundFavorite._id)
             }
+            const foundVisit = resVisit.find((oneVisit) => oneVisit.place._id === placeId  && new Date(oneVisit.coolDownUntil) > new Date())
+            if (foundVisit) {
+                setVisit(true)
+                setCoolDown(foundVisit.coolDownUntil)
+            }
+
 
         } catch (err) {
             setError(err?.response?.data?.message)
@@ -81,7 +108,8 @@ function PlaceDetails() {
                 <>
                     <h1>{place.name}</h1>
                     <button onClick={handleFavorite}>{favorite?'Unfavorite Place' :"Favorite Place"}</button>
-                    <button>Visit Place</button>
+                    <button onClick={handleVisit} disabled={visit}>{visit? `On cooldown until ${new Date(coolDown).toLocaleDateString()}`:'Visit Place'}</button>
+                    <p>{visitError}</p>
                     <p>{place.category}</p>
                     <p>{place.tags?.join(' / ')}</p>
                     <p>{place.description}</p>
