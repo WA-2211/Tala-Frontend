@@ -8,6 +8,7 @@ import Recommendation from "./pages/place/Recommendation";
 import BrowsePlaces from './pages/place/Allplaces'
 import PlaceDetails from "./pages/place/PlaceDetails";
 import VisitPlace from "./pages/visit/VisitPlace";
+import FavoritePlaces from "./pages/favorite/FavoritePlaces";
 import Dashboard from "./pages/Dashboard";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
@@ -24,7 +25,8 @@ function App() {
         <Route path="/place" element={<BrowsePlaces />}/>
         <Route path="/place/:placeId" element={<PlaceDetails />}/>
         <Route path="/recommended" element={<ProtectedRoute><Recommendation /></ProtectedRoute>} />
-        <Route path="/visit" element={<ProtectedRoute><VisitPlace></VisitPlace></ProtectedRoute>}/>
+        <Route path="/visit" element={<ProtectedRoute><VisitPlace/></ProtectedRoute>}/>
+        <Route path="/favorite" element={<ProtectedRoute><FavoritePlaces/></ProtectedRoute>}/>
       </Routes>
     </div>
   );
