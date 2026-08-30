@@ -12,6 +12,7 @@ import FavoritePlaces from "./pages/favorite/FavoritePlaces";
 import AllPlans from "./pages/plan/AllPlans";
 import PlanDetails from "./pages/plan/PlanDetails";
 import PublicInvite from "./pages/invite/PublicInvite";
+import CreateInvite from "./pages/invite/CreateInvite";
 import Dashboard from "./pages/Dashboard";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/favorite" element={<ProtectedRoute><FavoritePlaces/></ProtectedRoute>}/>
         <Route path="/plan" element={<ProtectedRoute><AllPlans/></ProtectedRoute>}/>
         <Route path="/plan/:planId" element={<ProtectedRoute><PlanDetails/></ProtectedRoute>}/>
+        <Route path="/plan/:planId/invite" element={<ProtectedRoute><CreateInvite/></ProtectedRoute>}/>
       </Routes>
     </div>
   );
