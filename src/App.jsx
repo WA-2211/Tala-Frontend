@@ -11,6 +11,7 @@ import VisitPlace from "./pages/visit/VisitPlace";
 import FavoritePlaces from "./pages/favorite/FavoritePlaces";
 import AllPlans from "./pages/plan/AllPlans";
 import PlanDetails from "./pages/plan/PlanDetails";
+import PublicInvite from "./pages/invite/PublicInvite";
 import Dashboard from "./pages/Dashboard";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
@@ -25,6 +26,7 @@ function App() {
         <Route path="/sign-up" element={<SignupPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/place" element={<BrowsePlaces />}/>
+        <Route path="/plan/invite/:inviteLink" element={<PublicInvite />}/>
         <Route path="/place/:placeId" element={<PlaceDetails />}/>
         <Route path="/recommended" element={<ProtectedRoute><Recommendation /></ProtectedRoute>} />
         <Route path="/visit" element={<ProtectedRoute><VisitPlace/></ProtectedRoute>}/>
