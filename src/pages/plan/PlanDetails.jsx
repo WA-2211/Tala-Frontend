@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Typography, Tag } from 'antd'
-import { getOnePlan, updatePlan } from '../../services/planService'
+import { getOnePlan, updatePlan, deletePlan } from '../../services/planService'
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 function PlanDetails() {
     const navigate = useNavigate()
@@ -61,6 +61,15 @@ function PlanDetails() {
         }
     }
 
+    async function handleDeletePlan(planId){
+        try {
+            const newPlanList = await deletePlan(planId)
+            navigate('/plan')
+        } catch (err) {
+            setError(err?.response?.data?.message)
+            
+        }
+    }
     async function updatePlanDetails(planId) {
         try {
             await updatePlan(planId, {})
@@ -120,9 +129,10 @@ function PlanDetails() {
                             {shareUrlLink}
                         </Paragraph >
                     </span>
-                    <p>Planned on: {new Date(plan.scheduledDate).toLocaleDateString('en-BH', options)}</p>
+                    <p>Planned on: {plan.scheduledDate? new Date(plan.scheduledDate).toLocaleDateString('en-BH', options): '- No date added yet -'}</p>
                     {tagStatus(plan.status)}
                     <h3>Edit Plan Details</h3>
+                    <button onClick={() =>handleDeletePlan(planId)}>Delete</button>
                     <button onClick={handleShowEditForm}>Edit</button>
                     {editForm && (
                         <>
