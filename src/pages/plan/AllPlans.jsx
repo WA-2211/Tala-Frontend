@@ -2,8 +2,10 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
-import { Flex, Spin, Typography } from 'antd'
+import { Flex, Spin, Typography, Tag } from 'antd'
 import { createPlan, getAllPlans } from '../../services/planService'
+import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+
 
 function AllPlans() {
     const navigate = useNavigate()
@@ -24,7 +26,17 @@ function AllPlans() {
 
     }
 
-
+     function tagStatus(status) {
+            if (status === 'scheduled') {
+                return <Tag color='warning' icon={<ClockCircleOutlined />}>Scheduled</Tag>
+            }
+            else if (status === 'completed') {
+                return <Tag color='success' icon={< CheckCircleOutlined />}>Completed</Tag>
+            }
+            else {
+                return <Tag color='error' icon={<CloseCircleOutlined />}>Cancelled</Tag>
+            }
+        }
 
     async function loadPlans() {
         try {
@@ -55,22 +67,21 @@ function AllPlans() {
     return (
         <main>
             <h1>Your Plans</h1>
-            {url}
             {plans.length === 0 ? <p>You have no plans yet - Add yours Now!</p>
                 : plans.map((onePlan) =>{
                 const shareUrlLink = `${url}/plan/invite/${onePlan.inviteLink}`
                 return(
                     <div key={onePlan._id}>
-                        <h3>{onePlan.place.name}</h3>
-                        <p>{new Date(onePlan.scheduledDate).toLocaleDateString('en-BH', options)}</p>
-                        <p>{onePlan.status}</p>
-                        <h3>Invite Friends</h3>
+                        <h3><Link to={`/plan/${onePlan._id}`}>{onePlan.place.name}</Link></h3>
+                        <p>{onePlan.scheduledDate? new Date(onePlan.scheduledDate).toLocaleDateString('en-BH', options): '- No date added yet -'}</p>
+                        {tagStatus(onePlan.status)}
+                        <h4>Invite Friends</h4>
                         <span>
                             <Paragraph  copyable={{text: shareUrlLink}}>
                             {shareUrlLink}
                             </Paragraph >
                         </span>
-                        
+
                     </div>
                 )}
                 )}

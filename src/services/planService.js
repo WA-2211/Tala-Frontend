@@ -20,9 +20,13 @@ async function updatePlan(planId, body){
     return res.data
 }
 
+async function deletePlan(planId){
+    const res = await api.delete('/plan/' + planId)
+}
 export {
     createPlan,
     getAllPlans,
     getOnePlan,
-    updatePlan
+    updatePlan,
+    deletePlan
 }
