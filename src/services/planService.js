@@ -10,7 +10,19 @@ async function getAllPlans(){
     return res.data
 }
 
+async function getOnePlan(planId){
+    const res = await api.get('/plan/' + planId)
+    return res.data
+}
+
+async function updatePlan(planId, body){
+    const res = await api.put('/plan/' + planId, body)
+    return res.data
+}
+
 export {
     createPlan,
-    getAllPlans
+    getAllPlans,
+    getOnePlan,
+    updatePlan
 }
