@@ -5,6 +5,24 @@ async function getPlanByLink(inviteLink){
     return res.data
 }
 
+async function createInvite(planId, username){
+    const res = await api.post('/plan/' + planId + '/invite', {username: username})
+    return res.data
+
+}
+
+async function updateInvite(inviteId, status){
+    const res = await api.put('/invite/' + inviteId, {status: status})
+    return res.data
+}
+
+async function getAllInvites(planId){
+    const res = await api.get('/plan/' + planId + '/invite')
+    return res.data
+}
 export {
-    getPlanByLink
+    getPlanByLink,
+    createInvite,
+    getAllInvites, 
+    updateInvite
 }

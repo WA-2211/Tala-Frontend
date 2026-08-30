@@ -66,7 +66,7 @@ function PublicInvite() {
             {plan && (
                 <>
                     <p>{tagStatus(plan.status)}</p>
-                    <h3><Link to={`/place/${plan.place._id}`}>{plan.place.name}</Link></h3>
+                    <h3>{plan.user.username} invited you to visit <Link to={`/place/${plan.place._id}`}>{plan.place.name}</Link></h3>
                     <p>{plan.place.scheduledDate ? new Date(plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
                     <p>{plan.place.description}</p>
 
