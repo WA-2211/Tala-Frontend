@@ -26,10 +26,15 @@ async function updatePlace(placeId, body){
     return res.data
 }
 
+async function deletePlace(placeId){
+    const res = await api.delete('/place/' + placeId)
+    return res.data
+}
 export{
     getRecommendation,
     getAllPlaces,
     getOnePlace,
     createPlace,
-    updatePlace
+    updatePlace,
+    deletePlace
 }

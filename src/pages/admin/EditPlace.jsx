@@ -46,13 +46,22 @@ function EditPlace() {
             event.preventDefault()
             const tagsArray = formData.tags.split(',').map((oneTag) => oneTag.trim())
             const res = await updatePlace(placeId, { ...formData, tags: tagsArray })
-            navigate('/place')
+            navigate('/admin/place')
 
         } catch (err) {
             setError(err?.response?.data?.message)
         }
     }
 
+    
+    async function handleCancel(){
+        try {
+            navigate(`/admin/place`)
+        } catch (err) {
+            setError(err?.response?.data?.message)
+            
+        }
+    }
 
     async function loadDetails() {
         try {
@@ -178,7 +187,7 @@ function EditPlace() {
                         placeholder='Separate tags with a comma'
                     ></input>
                 </div>
-                <button type='button'>Cancel</button>
+                <button type='button' onClick={() => handleCancel()}>Cancel</button>
                 <button type='submit'>Submit</button>
             </form>
         </main>

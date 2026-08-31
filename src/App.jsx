@@ -16,6 +16,7 @@ import CreateInvite from "./pages/invite/CreateInvite";
 import MyInvites from "./pages/invite/MyInvites";
 import CreatePlace from "./pages/admin/CreatePlace";
 import EditPlace from "./pages/admin/EditPlace";
+import ManagePlaces from "./pages/admin/ManagePlaces";
 import Dashboard from "./pages/Dashboard";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/plan/:planId" element={<ProtectedRoute><PlanDetails/></ProtectedRoute>}/>
         <Route path="/plan/:planId/invite" element={<ProtectedRoute><CreateInvite/></ProtectedRoute>}/>
         <Route path="/invite" element={<ProtectedRoute><MyInvites/></ProtectedRoute>}/>
+        <Route path="/admin/place" element={<AdminRoute><ManagePlaces/></AdminRoute>}/>
         <Route path="/admin/place/create" element={<AdminRoute><CreatePlace/></AdminRoute>}/>
         <Route path="/admin/place/:placeId/edit" element={<AdminRoute><EditPlace/></AdminRoute>}/>
 

@@ -54,7 +54,7 @@ function CreatePlace() {
                 },
                 tags: ''
             })
-            navigate('/place')
+            navigate('/admin/place')
 
         } catch (err) {
             setError(err?.response?.data?.message)
