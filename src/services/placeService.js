@@ -18,11 +18,18 @@ async function getOnePlace(placeId) {
 
 async function createPlace(body){
     const res = await api.post('/place', body)
+    return res.data
+}
+
+async function updatePlace(placeId, body){
+    const res = await api.put('/place/' + placeId , body)
+    return res.data
 }
 
 export{
     getRecommendation,
     getAllPlaces,
     getOnePlace,
-    createPlace
+    createPlace,
+    updatePlace
 }
