@@ -5,8 +5,8 @@ async function getRecommendation(){
     return res.data
 }
 
-async function getAllPlaces(){
-    const res = await api.get('/place')
+async function getAllPlaces(filter){
+    const res = await api.get('/place', {params: filter})
     return res.data
 }
 
