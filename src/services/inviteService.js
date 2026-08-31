@@ -20,9 +20,16 @@ async function getAllInvites(planId){
     const res = await api.get('/plan/' + planId + '/invite')
     return res.data
 }
+
+async function getMyinvites(){
+    const res = await api.get('/invite')
+    return res.data
+}
+
 export {
     getPlanByLink,
     createInvite,
     getAllInvites, 
-    updateInvite
+    updateInvite,
+    getMyinvites
 }
