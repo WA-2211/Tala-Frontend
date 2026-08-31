@@ -16,8 +16,13 @@ async function getOnePlace(placeId) {
 
 }
 
+async function createPlace(body){
+    const res = await api.post('/place', body)
+}
+
 export{
     getRecommendation,
     getAllPlaces,
-    getOnePlace
+    getOnePlace,
+    createPlace
 }
