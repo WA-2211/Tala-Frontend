@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin } from 'antd'
 import { createPlace } from '../../services/placeService'
+import { latLng } from 'leaflet'
 
 function CreatePlace() {
     const navigate = useNavigate()
@@ -16,22 +17,26 @@ function CreatePlace() {
         category: '',
         priceRange: {
             category: '',
-            averageBHD:''
+            averageBHD: ''
         },
-        tags: ''
+        tags: '',
+        location: {
+            lat: '',
+            long: ''
+        }
     })
 
     function handleChange(event) {
         const { name, type, value, checked } = event.target;
 
-        if(name.includes('.')){
+        if (name.includes('.')) {
             const [groupValue, fieldValue] = name.split('.')
             setFormData((prev) => ({
                 ...prev,
-                [groupValue]: {...prev[groupValue], [fieldValue]: value}
+                [groupValue]: { ...prev[groupValue], [fieldValue]: value }
             }))
 
-        }else{
+        } else {
             setFormData((prev) => ({
                 ...prev,
                 [name]: type === "checkbox" ? checked : value,
@@ -43,18 +48,30 @@ function CreatePlace() {
         try {
             event.preventDefault()
             const tagsArray = formData.tags.split(',').map((oneTag) => oneTag.trim())
-            const res = await createPlace({...formData, tags: tagsArray})
+            const locationInfo = {
+                type: 'Point',
+                coordinates: [Number(formData.location.long), Number(formData.location.lat)]
+            }
+
+            console.log('locationInfo:', locationInfo)
+console.log('formData.location:', formData.location)
+            const res = await createPlace({ ...formData, tags: tagsArray, location: locationInfo })
             setFormData({
                 name: '',
                 description: '',
                 category: '',
                 priceRange: {
-                    category:'',
-                    averageBHD:''
+                    category: '',
+                    averageBHD: ''
                 },
-                tags: ''
+                tags: '',
+                location: {
+                    lat: '',
+                    long: ''
+                }
             })
             navigate('/admin/place')
+            console.log(latLng)
 
         } catch (err) {
             setError(err?.response?.data?.message)
@@ -66,7 +83,7 @@ function CreatePlace() {
             setLoading(true)
             setError(false)
 
-           
+
 
         } catch (err) {
             setError(err?.response?.data?.message)
@@ -183,6 +200,32 @@ function CreatePlace() {
                         onChange={handleChange}
                         required
                         placeholder='Separate tags with a comma'
+                    ></input>
+                </div>
+
+                <div>
+                    <label htmlFor='location.lat'>Location Latitude:</label>
+                    <input
+                        type='number'
+                        name='location.lat'
+                        id='location.lat'
+                        value={formData.location.lat}
+                        autoComplete='off'
+                        onChange={handleChange}
+                        required
+                    ></input>
+                </div>
+
+                <div>
+                    <label htmlFor='location.long'>Location Longitude:</label>
+                    <input
+                        type='number'
+                        name='location.long'
+                        id='location.long'
+                        value={formData.location.long}
+                        autoComplete='off'
+                        onChange={handleChange}
+                        required
                     ></input>
                 </div>
 
