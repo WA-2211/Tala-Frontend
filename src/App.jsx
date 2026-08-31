@@ -14,11 +14,13 @@ import PlanDetails from "./pages/plan/PlanDetails";
 import PublicInvite from "./pages/invite/PublicInvite";
 import CreateInvite from "./pages/invite/CreateInvite";
 import MyInvites from "./pages/invite/MyInvites";
+import CreatePlace from "./pages/admin/CreatePlace";
 import Dashboard from "./pages/Dashboard";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./context/AuthContext";
+import AdminRoute from "./components/AdminRoute";
 function App() {
   return (
     <div>
@@ -37,6 +39,7 @@ function App() {
         <Route path="/plan/:planId" element={<ProtectedRoute><PlanDetails/></ProtectedRoute>}/>
         <Route path="/plan/:planId/invite" element={<ProtectedRoute><CreateInvite/></ProtectedRoute>}/>
         <Route path="/invite" element={<ProtectedRoute><MyInvites/></ProtectedRoute>}/>
+        <Route path="/admin/place/create" element={<AdminRoute><CreatePlace/></AdminRoute>}/>
 
       </Routes>
     </div>
