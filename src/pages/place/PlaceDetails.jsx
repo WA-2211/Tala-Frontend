@@ -1,4 +1,5 @@
 import React from 'react'
+import 'leaflet/dist/leaflet.css'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
@@ -7,10 +8,9 @@ import { getOnePlace } from '../../services/placeService'
 import { getReview, createReview } from '../../services/reviewService'
 import { addToFavorite, getAllFavorites, deleteFavorite } from '../../services/favoriteService'
 import { createVisit, getAllVisits } from '../../services/visitService'
-
+import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
 
 function PlaceDetails() {
-
     const navigate = useNavigate()
     const { user } = useAuth()
     const { placeId } = useParams()
@@ -25,17 +25,18 @@ function PlaceDetails() {
     const [coolDown, setCoolDown] = useState(null)
     const [reviewForm, setReviewForm] = useState(false)
     const [reviewFormData, setReviewFormData] = useState({
-        rating:'',
-        reviewText:''
+        rating: '',
+        reviewText: ''
     })
+    const position = [place.location?.coordinates?.[1], place.location?.coordinates?.[0]]
 
     async function handleFavorite() {
         try {
             if (favorite) {
-                 await deleteFavorite(favoriteId)
+                await deleteFavorite(favoriteId)
                 setFavorite(false)
                 setFavoriteId(null)
-             }
+            }
             else {
                 const favoritePlace = await addToFavorite(placeId)
                 setFavorite(true)
@@ -48,58 +49,58 @@ function PlaceDetails() {
         }
     }
 
-    async function handleVisit(){
+    async function handleVisit() {
         try {
-      
-              const createdVisit = await createVisit(placeId)
-                setVisit(true)
-                setCoolDown(createdVisit.coolDownUntil)
-                setVisitError('')
-            }
-         catch (err) {
+
+            const createdVisit = await createVisit(placeId)
+            setVisit(true)
+            setCoolDown(createdVisit.coolDownUntil)
+            setVisitError('')
+        }
+        catch (err) {
             setVisitError(err?.response?.data?.message)
 
         }
     }
 
-        function handleChange(event){
+    function handleChange(event) {
         const { name, type, value, checked } = event.target;
 
-    setReviewFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  }
-    
-    function handleShowReviewForm(){
-            setReviewForm(true)
+        setReviewFormData((prev) => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : value,
+        }));
     }
 
-        function handleHideReviewForm(){
-            setReviewForm(false)
-   
+    function handleShowReviewForm() {
+        setReviewForm(true)
     }
 
-   async function handleSubmit(event){
+    function handleHideReviewForm() {
+        setReviewForm(false)
+
+    }
+
+    async function handleSubmit(event) {
         try {
             event.preventDefault()
             const res = await createReview(placeId, reviewFormData)
             setReviewFormData({
-                rating:'',
-                reviewText:''
+                rating: '',
+                reviewText: ''
             })
             setReviews([...reviews, res])
             getReview(placeId)
             setReviewForm(false)
-            
+
         } catch (err) {
             setVisitError(err?.response?.data?.message)
-            
+
         }
     }
 
 
-  
+
     async function loadData() {
         try {
             setLoading(true)
@@ -113,23 +114,23 @@ function PlaceDetails() {
             setPlace(resPlace)
             setReviews(resReview)
 
-            if(user){
+            if (user) {
                 const [resFavorite, resVisit] = await Promise.all([
 
-                getAllFavorites(),
-                getAllVisits()
-            ])
-            const foundFavorite = resFavorite.find((oneFavorite) => oneFavorite.place._id === placeId)
-            if (foundFavorite) {
-                setFavorite(true)
-                setFavoriteId(foundFavorite._id)
+                    getAllFavorites(),
+                    getAllVisits()
+                ])
+                const foundFavorite = resFavorite.find((oneFavorite) => oneFavorite.place._id === placeId)
+                if (foundFavorite) {
+                    setFavorite(true)
+                    setFavoriteId(foundFavorite._id)
+                }
+                const foundVisit = resVisit.find((oneVisit) => oneVisit.place._id === placeId && new Date(oneVisit.coolDownUntil) > new Date())
+                if (foundVisit) {
+                    setVisit(true)
+                    setCoolDown(foundVisit.coolDownUntil)
+                }
             }
-            const foundVisit = resVisit.find((oneVisit) => oneVisit.place._id === placeId  && new Date(oneVisit.coolDownUntil) > new Date())
-            if (foundVisit) {
-                setVisit(true)
-                setCoolDown(foundVisit.coolDownUntil)
-            }
-        }
 
 
         } catch (err) {
@@ -160,10 +161,10 @@ function PlaceDetails() {
                     <h1>{place.name}</h1>
                     {user && (
                         <>
-                    <button onClick={handleFavorite}>{favorite?'Unfavorite Place' :"Favorite Place"}</button>
-                    <button onClick={handleVisit} disabled={visit}>
-                        {visit? `On cooldown until ${new Date(coolDown).toLocaleDateString()}`:'Visit Place'}
-                    </button>
+                            <button onClick={handleFavorite}>{favorite ? 'Unfavorite Place' : "Favorite Place"}</button>
+                            <button onClick={handleVisit} disabled={visit}>
+                                {visit ? `On cooldown until ${new Date(coolDown).toLocaleDateString()}` : 'Visit Place'}
+                            </button>
                         </>
                     )}
                     <p>{visitError}</p>
@@ -172,46 +173,64 @@ function PlaceDetails() {
                     <p>{place.description}</p>
                     <p>{place.priceRange?.category} , {place.priceRange?.averageBHD}BHD average</p>
                     <p>{place.ratingAvg} / 5</p>
+                    {place.location?.coordinates?  (
+                        <>
+                    <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{height: '350px', width:'100%'}}>
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={position}>
+                            <Popup>
+                                {place.name}
+                            </Popup>
+                        </Marker>
+                    </MapContainer>
+                        </>
+                    ) : (<p>Location not available for thie place</p>
+
+                    )
+                    }
                     <hr></hr>
 
-                    
-                    <button onClick={handleShowReviewForm} disabled={!user}>{user?'Add Review':'Sign in to add review'}</button>
+
+                    <button onClick={handleShowReviewForm} disabled={!user}>{user ? 'Add Review' : 'Sign in to add review'}</button>
                     {reviewForm && (
                         <>
-                        <form onSubmit={handleSubmit}>
-                        <div>
-                            <label htmlFor='rating'>Your Rating</label>
-                            <input 
-                            type='number'
-                            name='rating'
-                            id='rating'
-                            value={reviewFormData.rating}
-                            autoComplete='off'
-                            onChange={handleChange}
-                            required
-                             />
-                        </div>
+                            <form onSubmit={handleSubmit}>
+                                <div>
+                                    <label htmlFor='rating'>Your Rating</label>
+                                    <input
+                                        type='number'
+                                        name='rating'
+                                        id='rating'
+                                        value={reviewFormData.rating}
+                                        autoComplete='off'
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
 
-                        <div>
-                            <label htmlFor='reviewText'>Place Review</label>
-                            <textarea
-                            id='reviewText'
-                            name='reviewText'
-                            value={reviewFormData.reviewText}
-                            autoComplete='off'
-                            onChange={handleChange}
-                            ></textarea>
-                        </div>  
+                                <div>
+                                    <label htmlFor='reviewText'>Place Review</label>
+                                    <textarea
+                                        id='reviewText'
+                                        name='reviewText'
+                                        value={reviewFormData.reviewText}
+                                        autoComplete='off'
+                                        onChange={handleChange}
+                                    ></textarea>
+                                </div>
 
-                        <div>
-                            <button type='button' onClick={handleHideReviewForm}>Cancel</button>
-                            <button type='submit'>Submit</button>
+                                <div>
+                                    <button type='button' onClick={handleHideReviewForm}>Cancel</button>
+                                    <button type='submit'>Submit</button>
 
-                        </div>                      
-                    </form>
+                                </div>
+                            </form>
                         </>
                     )}
-                    
+
                     <h3>Recent Reviews</h3>
                     {reviews.map((oneReview) =>
                         <div key={oneReview._id}>

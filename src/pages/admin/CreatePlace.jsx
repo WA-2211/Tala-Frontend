@@ -53,8 +53,6 @@ function CreatePlace() {
                 coordinates: [Number(formData.location.long), Number(formData.location.lat)]
             }
 
-            console.log('locationInfo:', locationInfo)
-console.log('formData.location:', formData.location)
             const res = await createPlace({ ...formData, tags: tagsArray, location: locationInfo })
             setFormData({
                 name: '',
@@ -71,7 +69,6 @@ console.log('formData.location:', formData.location)
                 }
             })
             navigate('/admin/place')
-            console.log(latLng)
 
         } catch (err) {
             setError(err?.response?.data?.message)

@@ -19,7 +19,12 @@ function EditPlace() {
             category: '',
             averageBHD: ''
         },
-        tags: ''
+        tags: '',
+        location: {
+            lat: '',
+            long: ''
+        }
+
     })
 
 
@@ -45,7 +50,12 @@ function EditPlace() {
         try {
             event.preventDefault()
             const tagsArray = formData.tags.split(',').map((oneTag) => oneTag.trim())
-            const res = await updatePlace(placeId, { ...formData, tags: tagsArray })
+            const locationInfo = {
+                type: 'Point',
+                coordinates: [Number(formData.location.long), Number(formData.location.lat)]
+            }
+
+            const res = await updatePlace(placeId, { ...formData, tags: tagsArray, location: locationInfo })
             navigate('/admin/place')
 
         } catch (err) {
@@ -69,7 +79,10 @@ function EditPlace() {
             setError(false)
 
             const res = await getOnePlace(placeId)
-            setFormData({ ...res, tags: res.tags.join(', ') })
+            setFormData({ ...res, tags: res.tags.join(', '), location:{
+                long:res.location.coordinates[0],
+                lat: res.location.coordinates[1]
+            } })
         } catch (err) {
             setError(err?.response?.data?.message)
 
@@ -187,6 +200,33 @@ function EditPlace() {
                         placeholder='Separate tags with a comma'
                     ></input>
                 </div>
+
+                 <div>
+                    <label htmlFor='location.lat'>Location Latitude:</label>
+                    <input
+                        type='number'
+                        name='location.lat'
+                        id='location.lat'
+                        value={formData.location.lat}
+                        autoComplete='off'
+                        onChange={handleChange}
+                        required
+                    ></input>
+                </div>
+
+                <div>
+                    <label htmlFor='location.long'>Location Longitude:</label>
+                    <input
+                        type='number'
+                        name='location.long'
+                        id='location.long'
+                        value={formData.location.long}
+                        autoComplete='off'
+                        onChange={handleChange}
+                        required
+                    ></input>
+                </div>
+
                 <button type='button' onClick={() => handleCancel()}>Cancel</button>
                 <button type='submit'>Submit</button>
             </form>
