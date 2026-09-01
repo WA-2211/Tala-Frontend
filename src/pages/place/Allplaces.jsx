@@ -110,67 +110,69 @@ function Allplaces() {
 
     return (
         <main className={styles.main}>
+            <p className={styles.error}>{error}</p>
+
             <div className={styles.filterContent}>
                 {user && (
                     <button onClick={handleShowFilters} className={styles.btnFilter}>{showFilter ? 'Hide Filters' : 'Filters'}</button>
                 )}
 
-                {user &&showFilter && (
+                {user && showFilter && (
                     <>
                         <div className={styles.filterContainer}>
-                        <div className={styles.filterElement}>
-                        <h4>By category:</h4>
-                        <div className={styles.filterTags}>
-                            <Tag.CheckableTagGroup
-                                options={categories}
-                                value={filter.category || null}
-                                onChange={handleCategoryChange}
-                            />
+                            <div className={styles.filterElement}>
+                                <h4>By category:</h4>
+                                <div className={styles.filterTags}>
+                                    <Tag.CheckableTagGroup
+                                        options={categories}
+                                        value={filter.category || null}
+                                        onChange={handleCategoryChange}
+                                    />
+                                </div>
+                            </div>
+                            <div className={styles.filterElement}>
+                                <h4>By price range:</h4>
+                                <div className={styles.filterTags}>
+                                    <Tag.CheckableTagGroup
+                                        options={priceRangeData}
+                                        value={filter.priceRange || null}
+                                        onChange={handlePriceRangeChange}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className={styles.filterElement}>
+                                <h4>By Rating:</h4>
+                                <div className={styles.filterTags}>
+                                    <Tag.CheckableTagGroup
+                                        options={ratings}
+                                        value={filter.ratingMin || null}
+                                        onChange={handleRatingChange}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className={styles.filterElement}>
+                                <h4>By Location:</h4>
+                                <div className={styles.filterTags}>
+                                    <Tag.CheckableTag
+                                        checked={nearby} onChange={(checked) => {
+                                            if (checked) {
+                                                handleNearMePlaces()
+                                            } else {
+                                                setNearby(false)
+                                            }
+                                        }}>
+                                        Near Me
+                                    </Tag.CheckableTag>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                        <div className={styles.filterElement}>
-                    <h4>By price range:</h4>
-                    <div className={styles.filterTags}>
-                        <Tag.CheckableTagGroup
-                            options={priceRangeData}
-                            value={filter.priceRange || null}
-                            onChange={handlePriceRangeChange}
-                        />
-                    </div>
-                </div>
 
-                    <div className={styles.filterElement}>
-                    <h4>By Rating:</h4>
-                    <div className={styles.filterTags}>
-                        <Tag.CheckableTagGroup
-                            options={ratings}
-                            value={filter.ratingMin || null}
-                            onChange={handleRatingChange}
-                        />
-                    </div>
-                </div>
-
-                    <div className={styles.filterElement}>
-                    <h4>By Location:</h4>
-                    <div className={styles.filterTags}>
-                        <Tag.CheckableTag
-                            checked={nearby} onChange={(checked) => {
-                                if (checked) {
-                                    handleNearMePlaces()
-                                } else {
-                                    setNearby(false)
-                                }
-                            }}>
-                            Near Me
-                        </Tag.CheckableTag>
-                    </div>
-                </div>
-                </div>
-
-                <button onClick={loadPlaces} className={styles.btnFilter}>Apply Filters</button>
-            </>
-            )}
-</div>
+                        <button onClick={loadPlaces} className={styles.btnFilter}>Apply Filters</button>
+                    </>
+                )}
+            </div>
             <h1>Where To Go?</h1>
             {places.map((onePlace) =>
                 <div key={onePlace._id} className={styles.placeContainer}>

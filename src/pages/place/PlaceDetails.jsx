@@ -9,9 +9,10 @@ import { getReview, createReview } from '../../services/reviewService'
 import { addToFavorite, getAllFavorites, deleteFavorite } from '../../services/favoriteService'
 import { createVisit, getAllVisits } from '../../services/visitService'
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
+import styles from '../../styles/PlaceDetails.module.css'
 
 function PlaceDetails() {
-    const navigate = useNavigate()
+    const navigate = useNavigate()  
     const { user } = useAuth()
     const { placeId } = useParams()
     const [place, setPlace] = useState({})
@@ -155,24 +156,26 @@ function PlaceDetails() {
     if (error) return <p>ERROR: {error}</p>
 
     return (
-        <main>
+        <main className={styles.main}>
             {place && (
-                <>
+                <div className={styles.placeContainer}>
                     <h1>{place.name}</h1>
                     {user && (
-                        <>
-                            <button onClick={handleFavorite}>{favorite ? 'Unfavorite Place' : "Favorite Place"}</button>
-                            <button onClick={handleVisit} disabled={visit}>
+                        <div className={styles.btnContainer}>
+                            <button onClick={handleFavorite} className={styles.btnFavorite}>
+                                {favorite ? 'Unfavorite Place' : "Favorite Place"}
+                            </button>
+                            <button onClick={handleVisit} disabled={visit} className={styles.btn}>
                                 {visit ? `On cooldown until ${new Date(coolDown).toLocaleDateString()}` : 'Visit Place'}
                             </button>
-                        </>
+                        </div>
                     )}
-                    <p>{visitError}</p>
-                    <p>{place.category}</p>
-                    <p>{place.tags?.join(' / ')}</p>
-                    <p>{place.description}</p>
-                    <p>{place.priceRange?.category} , {place.priceRange?.averageBHD}BHD average</p>
-                    <p>{place.ratingAvg} / 5</p>
+                    {visitError && <p className={styles.error}>{visitError}</p>} 
+                    <p className={styles.placeCategory}>{place.category}</p>
+                    <p className={styles.placeTags}>{place.tags?.join(' / ')}</p>
+                    <p className={styles.placeDescription}>{place.description}</p>
+                    <p className={styles.placePrice}>{place.priceRange?.category} , {place.priceRange?.averageBHD}BHD average</p>
+                    <p className={styles.placeRating}>{place.ratingAvg} / 5</p>
                     {place.location?.coordinates?  (
                         <>
                     <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{height: '350px', width:'100%'}}>
@@ -191,14 +194,16 @@ function PlaceDetails() {
 
                     )
                     }
-                    <hr></hr>
+                    <hr className={styles.hr}></hr>
 
 
-                    <button onClick={handleShowReviewForm} disabled={!user}>{user ? 'Add Review' : 'Sign in to add review'}</button>
+                    <button className={styles.btn} onClick={handleShowReviewForm} disabled={!user}>
+                        {user ? 'Add Review' : 'Sign in to add review'}
+                    </button>
                     {reviewForm && (
                         <>
-                            <form onSubmit={handleSubmit}>
-                                <div>
+                            <form onSubmit={handleSubmit} className={styles.reviewForm}>
+                                <div className={styles.formElement}>
                                     <label htmlFor='rating'>Your Rating</label>
                                     <input
                                         type='number'
@@ -208,10 +213,11 @@ function PlaceDetails() {
                                         autoComplete='off'
                                         onChange={handleChange}
                                         required
+                                        className={styles.formInput}
                                     />
                                 </div>
 
-                                <div>
+                                <div className={styles.formElement}>
                                     <label htmlFor='reviewText'>Place Review</label>
                                     <textarea
                                         id='reviewText'
@@ -219,13 +225,17 @@ function PlaceDetails() {
                                         value={reviewFormData.reviewText}
                                         autoComplete='off'
                                         onChange={handleChange}
+                                        className={styles.formInput}
                                     ></textarea>
                                 </div>
 
                                 <div>
-                                    <button type='button' onClick={handleHideReviewForm}>Cancel</button>
-                                    <button type='submit'>Submit</button>
-
+                                    <button type='button' onClick={handleHideReviewForm} className={styles.btn}>
+                                        Cancel
+                                    </button>
+                                    <button type='submit' className={styles.btn}>
+                                        Submit
+                                    </button>
                                 </div>
                             </form>
                         </>
@@ -233,17 +243,17 @@ function PlaceDetails() {
 
                     <h3>Recent Reviews</h3>
                     {reviews.map((oneReview) =>
-                        <div key={oneReview._id}>
-                            <p>{oneReview.user?.username}</p>
+                        <div key={oneReview._id} className={styles.reviewContainer}>
+                            <p className={styles.reviewUser}>{oneReview.user?.username}</p>
                             <Flex align='center' gap='small'>
                                 <Rate allowHalf disabled value={oneReview.rating} />
                                 <span>{oneReview.rating} / 5</span>
                             </Flex>
-                            <p>{oneReview.reviewText}</p>
+                            <p className={styles.reviewText}>{oneReview.reviewText}</p>
                         </div>
                     )}
 
-                </>
+                </div>
             )}
 
         </main>

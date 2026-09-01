@@ -1,0 +1,119 @@
+.main{
+    margin: 0 auto;
+}
+
+.placeContainer{
+    border: 1px solid var(--Pink);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    margin: 0 auto;
+    max-width: 800px;
+}
+.placeContainer h1{
+    font-family: "Chelsea Market", system-ui;
+    font-size: 2.3rem;
+    margin-bottom: 2rem;
+}
+
+.btn{
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5rem 0.7rem;
+    background-color: var(--Dark-Yellow);
+    color: var(--Dark-Red);
+}
+
+.btn:hover{
+    background-color: var(--Light-Yellow);
+    cursor: pointer;
+}
+
+.btnFavorite{
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5rem 0.7rem;
+     background-color: var(--Pink-Red);
+    color: var(--Light-Yellow);
+    margin-right: 0.5rem;
+}
+
+.btnFavorite:hover{
+    background-color: var(--Light-Yellow); 
+    color: var(--Dark-Pink-Red);
+    cursor: pointer;
+}
+
+.btn:disabled{
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.placeCategory{
+    font-size: 1.2rem;
+    font-weight: 500;
+    /* margin-bottom: 1rem; */
+    color: var(--Dark-Yellow);
+}
+
+.placeTags{
+    display: inline-flex;
+    background-color: var(--Pink);
+    padding: 0.2rem 0.5rem;
+    border-radius: 1rem;
+    font-weight: 500;
+}
+
+.placeDescription{
+    font-size: 1rem;
+}
+
+.placePrice, .placeRating{
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.reviewForm{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formElement{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formElement label{
+    font-weight: 500;
+}
+.formInput{
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    font-family:'cormorant garamond', serif;
+
+}
+
+.reviewContainer{
+    background-color: var(--Transparent);
+    border: 1px solid var(--Pink);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.reviewUser{
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--Pink);
+}
+
+
+.hr{
+    border: none;
+    border-top: 1px solid var(--Pink);
+    margin: 1.2rem ;
+}

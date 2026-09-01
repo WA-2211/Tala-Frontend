@@ -40,7 +40,7 @@ const SignInForm = ({}) => {
     <main className={styles.main}>
       <h1>Welcome back!</h1>
       <p>Don't have an account? <span className={styles.link} onClick={() => navigate("/sign-up")}>Sign Up</span></p>
-      <p className='error'>{error}</p>
+      <p className={styles.error}>{error}</p>
       <div className={styles.content}>
       <form autoComplete='off' onSubmit={handleSubmit} className={styles.SignInForm}>
         <div className={styles.formElement}>
