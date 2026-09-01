@@ -12,6 +12,7 @@ function Allplaces() {
     const [places, setPlaces] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [showFilter, setShowFilter] = useState(false)
     const [coords, setCoords] = useState(null)
     const [nearby, setNearby] = useState(false)
     const [filter, setFilter] = useState({
@@ -70,8 +71,9 @@ function Allplaces() {
     }
 
     function handleShowFilters() {
-        setShowFilter(true)
+        setShowFilter((filter) => !filter)
     }
+
     async function loadPlaces() {
         try {
             setLoading(true)
@@ -108,56 +110,62 @@ function Allplaces() {
     return (
         <main>
             <div>
-                <button onClick={handleShowFilters}>Filters</button>
-                <h4>By category:</h4>
-                <div>
-                    <Tag.CheckableTagGroup
-                        options={categories}
-                        value={filter.category || null}
-                        onChange={handleCategoryChange}
-                    />
-                </div>
-            </div>
+                <button onClick={handleShowFilters}>{showFilter ? 'Hide Filters' : 'Filters'}</button>
+                {showFilter && (
+                    <>
+                    <div>
+                        <h4>By category:</h4>
+                        <div>
+                            <Tag.CheckableTagGroup
+                                options={categories}
+                                value={filter.category || null}
+                                onChange={handleCategoryChange}
+                            />
+                        </div>
+                    </div>
 
-            <div>
-                <h4>By price range:</h4>
                 <div>
-                    <Tag.CheckableTagGroup
-                        options={priceRangeData}
-                        value={filter.priceRange || null}
-                        onChange={handlePriceRangeChange}
-                    />
+                    <h4>By price range:</h4>
+                    <div>
+                        <Tag.CheckableTagGroup
+                            options={priceRangeData}
+                            value={filter.priceRange || null}
+                            onChange={handlePriceRangeChange}
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <h4>By Rating:</h4>
                 <div>
-                    <Tag.CheckableTagGroup
-                        options={ratings}
-                        value={filter.ratingMin || null}
-                        onChange={handleRatingChange}
-                    />
+                    <h4>By Rating:</h4>
+                    <div>
+                        <Tag.CheckableTagGroup
+                            options={ratings}
+                            value={filter.ratingMin || null}
+                            onChange={handleRatingChange}
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <h4>By Location:</h4>
                 <div>
-                    <Tag.CheckableTag
-                        checked={nearby} onChange={(checked) => {
-                            if (checked) {
-                                handleNearMePlaces()
-                            } else {
-                                setNearby(false)
-                            }
-                        }}>
-                        Near Me
-                    </Tag.CheckableTag>
+                    <h4>By Location:</h4>
+                    <div>
+                        <Tag.CheckableTag
+                            checked={nearby} onChange={(checked) => {
+                                if (checked) {
+                                    handleNearMePlaces()
+                                } else {
+                                    setNearby(false)
+                                }
+                            }}>
+                            Near Me
+                        </Tag.CheckableTag>
+                    </div>
                 </div>
-            </div>
 
-            <button onClick={loadPlaces}>Apply Filters</button>
+                <button onClick={loadPlaces}>Apply Filters</button>
+            </>
+            )}
+</div>
             <h1>Where To Go?</h1>
             {places.map((onePlace) =>
                 <div key={onePlace._id}>
