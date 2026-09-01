@@ -1,7 +1,16 @@
 import api from "./api";
 
+
 async function getRecommendation(){
     const res = await api.get('/place/recommended')
+    return res.data
+}
+
+async function getNearMePlaces(lat, long, filter){
+    const res = await api.get('/place/places-nearby', {params: {lat, long, ...filter}
+    }
+
+    )
     return res.data
 }
 
@@ -32,6 +41,7 @@ async function deletePlace(placeId){
 }
 export{
     getRecommendation,
+    getNearMePlaces,
     getAllPlaces,
     getOnePlace,
     createPlace,

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Tag } from 'antd'
-import { getAllPlaces } from '../../services/placeService'
+import { getAllPlaces, getNearMePlaces } from '../../services/placeService'
 
 function Allplaces() {
 
@@ -12,6 +12,9 @@ function Allplaces() {
     const [places, setPlaces] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [coords, setCoords] = useState(null)
+    const [nearby, setNearby] = useState(false)
+    
     const [filter, setFilter] = useState({
         category: '',
         priceRange: '',
@@ -26,8 +29,6 @@ function Allplaces() {
         { label: '4+', value: 4 },
         { label: '4.5+', value: 4.5 },
         { label: '5', value: 5 }
-
-
     ]
 
     function handleCategoryChange(value) {
@@ -52,13 +53,37 @@ function Allplaces() {
         }))
     }
 
+    function handleNearMePlaces(){
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const addCoordinates = {
+                    lat: position.coords.latitude,
+                    long: position.coords.longitude
+                }
+
+                setCoords(addCoordinates)
+                setNearby(true)
+            },
+            (err) => {
+                setError('Could not get location')
+            }
+        )
+    }
+
     async function loadPlaces() {
         try {
             setLoading(true)
             setError(false)
 
-            const res = await getAllPlaces(filter)
+            let res
+            if(nearby && coords){
+                res = await getNearMePlaces(coords.long, coords.lat, filter)
+            }
+            else{
+                res = await getAllPlaces(filter)
+            }
             setPlaces(res)
+
         } catch (err) {
             setError(err?.response?.data?.message)
 
@@ -110,6 +135,22 @@ function Allplaces() {
                         value={filter.ratingMin || null}
                         onChange={handleRatingChange}
                     />
+                </div>
+            </div>
+
+                    <div>
+                <h4>By Location:</h4>
+                <div>
+        <Tag.CheckableTag 
+        checked={nearby} onChange={(checked) =>{
+            if(checked){
+                handleNearMePlaces()
+            } else{
+                setNearby(false)
+            }
+        }}>
+          Near Me
+        </Tag.CheckableTag>
                 </div>
             </div>
 
