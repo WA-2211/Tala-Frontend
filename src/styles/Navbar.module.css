@@ -1,0 +1,27 @@
+nav{
+    background-color: var(--Dark-Yellow);
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    border-radius: 3px;
+}
+
+.links{
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 21px;
+    color: var(--Dark-Red);
+}
+.links:hover{
+    cursor: pointer;
+    color: var(--Pink-Red);
+    text-decoration: underline ;
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.3rem;
+}
+
+.btnSignout{
+    background-color: var(--Pink-Red);
+    border: none;
+    border-radius: 5px;
+}
