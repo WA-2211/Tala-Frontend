@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin } from 'antd'
 import { getAllVisits } from '../../services/visitService'
+import styles from '../../styles/VisitPlace.module.css'
 
 function VisitPlace() {
     const navigate = useNavigate()
@@ -47,18 +48,18 @@ function VisitPlace() {
     if (error) return <p>ERROR: {error}</p>
 
     return (
-        <main>
+        <main className={styles.main}>
             <h1>Your Visit History</h1>
 
-            {visits.length === 0 ? <p>You have no visits yet - Explore Now!</p>
-            :visits.map((oneVisit) =>
-                <div key={oneVisit._id}>
-                    <h3><Link to={`/place/${oneVisit.place._id}`}>{oneVisit.place.name}</Link></h3>
-                    <p>{new Date(oneVisit.visitedAt).toLocaleDateString('en-BH', options)}</p>
-                    {new Date(oneVisit.coolDownUntil) > new Date()? <p>CoolDown until: {new Date(oneVisit.coolDownUntil).toLocaleDateString('en-BH', options)}</p>:<p>This place is available to visit again</p>}
+            {visits.length === 0 ? <p className={styles.noVisits}>You have no visits yet - Explore Now!</p>
+                : visits.map((oneVisit) =>
+                    <div key={oneVisit._id} className={styles.visitContainer}>
+                        <h3><Link to={`/place/${oneVisit.place._id}`}>{oneVisit.place.name}</Link></h3>
+                        <p className={styles.visitDate}><span style={{fontWeight: 'bold'}}>Visited on:</span> {new Date(oneVisit.visitedAt).toLocaleDateString('en-BH', options)}</p>
+                        {new Date(oneVisit.coolDownUntil) > new Date() ? <p className={styles.visitData}><span style={{fontWeight: 'bold'}}>CoolDown until:</span> {new Date(oneVisit.coolDownUntil).toLocaleDateString('en-BH', options)}</p> : <p className={styles.visitData}>This place is available to visit again</p>}
 
-                </div>
-            )}
+                    </div>
+                )}
         </main>
     )
 }

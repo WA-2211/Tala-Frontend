@@ -1,0 +1,27 @@
+.main{
+    margin: 0 auto;
+}
+
+.visitContainer{
+    background-color: var(--Transparent);
+    border: 1px solid var(--Pink);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.visitContainer h3{
+    margin-top: 0;
+}
+
+.visitContainer h3 a{
+    text-decoration: none;
+    color: var(--Light-Yellow);
+    font-family: "Chelsea Market", system-ui;
+}
+.visitContainer h3 a:hover{
+    color: var(--Pink);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+}
