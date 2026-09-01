@@ -1,0 +1,29 @@
+.main {
+    text-align: center;
+}
+
+.main h1{
+    font-family: "Chelsea Market", system-ui;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    margin-top: 5rem;
+}
+
+.main p{
+    color: var(--Pink);
+    font-size: 1.2rem;
+}
+
+.btn{
+    background-color: var(--Dark-Yellow);
+    text-decoration: none;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    color: var(--Dark-Pink-Red);
+    font-weight: 700;
+}
+
+.btn:hover{
+    background-color: #bd9f77 ;
+    cursor: pointer;
+}

@@ -1,13 +1,18 @@
-.PageSignin h1 {
+.main h1 {
     font-family: "Chelsea Market", system-ui;
     text-align: left;
     margin-left: 13rem;
     margin-top: 2rem;
     margin-bottom: 0;
 }
-/* .PageSignUp{
-    min-height: 100vh;
-} */
+
+.main p{
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    text-align: left;
+    margin-left: 14rem;
+}
 .content{
     text-align: left;
     display: flex;
@@ -89,4 +94,15 @@ img{
 .btnCancel:hover{
     cursor: pointer;
     background-color: var(--Dark-Pink-Red);
+}
+
+.link{
+    color: var(--Light-Yellow);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.link:hover{
+    color: var(--Pink-Red);
+    cursor: pointer;
 }

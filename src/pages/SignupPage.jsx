@@ -39,9 +39,10 @@ function Signup() {
   };
 
   return (
-    <main className={styles.PageSignUp}>
+    <main className={styles.main}>
       <h1>Create New Account</h1>
       <p className="error">{error}</p>
+      <p>Already have an account? <span className={styles.link} onClick={() => navigate("/sign-in")}>Sign In</span></p>
       <div className={styles.content}>
       <img src='\src\images\image1.jpg' alt="" />
       <form onSubmit={handleSubmit} className={styles.formSignUp}>
