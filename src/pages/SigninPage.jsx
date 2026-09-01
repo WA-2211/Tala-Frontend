@@ -38,9 +38,9 @@ const SignInForm = ({}) => {
 
   return (
     <main className={styles.PageSignin}>
-      <div className={styles.content}>
       <h1>Welcome back!</h1>
       <p className='error'>{error}</p>
+      <div className={styles.content}>
       <form autoComplete='off' onSubmit={handleSubmit} className={styles.SignInForm}>
         <div className={styles.formElement}>
           <label htmlFor='email'>Email</label>
@@ -76,6 +76,7 @@ const SignInForm = ({}) => {
           <button className={styles.btnCancel}  onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
+      <img src="\src\images\BAHRAIN GATE.jpg" alt="" />
       </div>
     </main>
   );

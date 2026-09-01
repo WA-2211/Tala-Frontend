@@ -1,22 +1,35 @@
-h1 {
+.PageSignUp h1 {
     font-family: "Chelsea Market", system-ui;
+    text-align: right;
+    margin-right: 9.5rem;
+    margin-top: 3rem;
+    margin-bottom: 0;
+    
 }
+
 .PageSignUp{
-    background-image: url('../images/image1.jpg');
-    background-repeat: no-repeat;
-    background-position: left;
-    background-size: 30%;
     min-height: 100vh;
+}
+.content{
+    display: flex;
+    align-items: stretch;
+    min-height: calc(100vh - 100px);
+}
+
+img{
+    width: 40%;
+    height: 100%; 
 }
 
 
 .formSignUp {
-    display: inline-flex;
+    display: flex;
+    flex: 1;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: var(--Dark-Red);
-    border-radius: 1rem;
     padding: 2rem;
+    padding-top: 0; 
 
 }
 
@@ -52,7 +65,7 @@ h1 {
     padding: 0.4rem;
     width: 6rem;
     height: 2rem;
-    color: black;
+    color: var(--Dark-Pink-Red);
     background-color: var(--Dark-Yellow);
     font-family: "Cormorant Upright", serif;
     font-weight: 700;
@@ -60,7 +73,7 @@ h1 {
 
 .btnSign:hover{
     cursor: pointer;
-    background-color: var(--Light-Yellow) ;
+    background-color: #bd9f77 ;
 }
 
 .btnCancel{
@@ -69,6 +82,7 @@ h1 {
     padding: 0.4rem;
     width: 6rem;
     height: 2rem;
+    color: var(--Dark-Yellow);
     font-family: "Cormorant Upright", serif;
     font-weight: 700;
     background-color: var(--Pink-Red);

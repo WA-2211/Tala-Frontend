@@ -40,9 +40,10 @@ function Signup() {
 
   return (
     <main className={styles.PageSignUp}>
-      <div className={styles.content}>
       <h1>Create New Account</h1>
       <p className="error">{error}</p>
+      <div className={styles.content}>
+      <img src='\src\images\image1.jpg' alt="" />
       <form onSubmit={handleSubmit} className={styles.formSignUp}>
         <div className={styles.formElement}>
           <label htmlFor="username" className={styles.formLabel}>Username</label>

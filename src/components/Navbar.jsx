@@ -1,12 +1,15 @@
 import { Link } from 'react-router'
 import { useAuth } from '../context/AuthContext'
 import styles from '../styles/Navbar.module.css'
+import Logo from '../images/Logo.png'
 
 function Navbar() {
   const { logout, user} = useAuth()
   return (
     <nav className={styles.nav}>
-      <a>Logo</a>
+      <a href='/'>
+        <img src={Logo} alt="Tala Logo" className={styles.logo} style={{ width: '100px', height: '80px', position: 'absolute' , left: 0, top:' -12px'}} />
+      </a>
       {user 
       ? 
       (<>
