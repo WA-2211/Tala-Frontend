@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Tag } from 'antd'
 import { getAllPlaces, getNearMePlaces } from '../../services/placeService'
+import styles from '../../styles/Allplaces.module.css'
 
 function Allplaces() {
 
@@ -108,25 +109,28 @@ function Allplaces() {
 
 
     return (
-        <main>
-            <div>
-                <button onClick={handleShowFilters}>{showFilter ? 'Hide Filters' : 'Filters'}</button>
-                {showFilter && (
+        <main className={styles.main}>
+            <div className={styles.filterContent}>
+                {user && (
+                    <button onClick={handleShowFilters} className={styles.btnFilter}>{showFilter ? 'Hide Filters' : 'Filters'}</button>
+                )}
+
+                {user &&showFilter && (
                     <>
-                    <div>
+                        <div className={styles.filterContainer}>
+                        <div className={styles.filterElement}>
                         <h4>By category:</h4>
-                        <div>
+                        <div className={styles.filterTags}>
                             <Tag.CheckableTagGroup
                                 options={categories}
                                 value={filter.category || null}
                                 onChange={handleCategoryChange}
                             />
                         </div>
-                    </div>
-
-                <div>
+                        </div>
+                        <div className={styles.filterElement}>
                     <h4>By price range:</h4>
-                    <div>
+                    <div className={styles.filterTags}>
                         <Tag.CheckableTagGroup
                             options={priceRangeData}
                             value={filter.priceRange || null}
@@ -135,9 +139,9 @@ function Allplaces() {
                     </div>
                 </div>
 
-                <div>
+                    <div className={styles.filterElement}>
                     <h4>By Rating:</h4>
-                    <div>
+                    <div className={styles.filterTags}>
                         <Tag.CheckableTagGroup
                             options={ratings}
                             value={filter.ratingMin || null}
@@ -146,9 +150,9 @@ function Allplaces() {
                     </div>
                 </div>
 
-                <div>
+                    <div className={styles.filterElement}>
                     <h4>By Location:</h4>
-                    <div>
+                    <div className={styles.filterTags}>
                         <Tag.CheckableTag
                             checked={nearby} onChange={(checked) => {
                                 if (checked) {
@@ -161,18 +165,19 @@ function Allplaces() {
                         </Tag.CheckableTag>
                     </div>
                 </div>
+                </div>
 
-                <button onClick={loadPlaces}>Apply Filters</button>
+                <button onClick={loadPlaces} className={styles.btnFilter}>Apply Filters</button>
             </>
             )}
 </div>
             <h1>Where To Go?</h1>
             {places.map((onePlace) =>
-                <div key={onePlace._id}>
+                <div key={onePlace._id} className={styles.placeContainer}>
                     <h3><Link to={`/place/${onePlace._id}`}>{onePlace.name}</Link></h3>
-                    <p>{onePlace.tags.join(' / ')} </p>
+                    <p className={styles.placeTags}>{onePlace.tags.join(' / ')} </p>
                     <p>{onePlace.description}</p>
-                    <p>Price Range: {onePlace.priceRange.category} , {onePlace.priceRange.averageBHD}BHD average</p>
+                    <p className={styles.placePrice}><span style={{ fontWeight: '700' }}>Price Range : </span>{onePlace.priceRange.category} , <span style={{ fontFamily: 'serif' }}>{onePlace.priceRange.averageBHD}</span> BHD average</p>
 
                 </div>
             )}
