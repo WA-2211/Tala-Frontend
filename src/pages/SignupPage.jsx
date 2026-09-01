@@ -97,7 +97,7 @@ function Signup() {
           />
         </div>
         <div className={styles.btnContainer}>
-          <button className={styles.btn} disabled={isFormInvalid() || submitting}>{submitting ? 'Signing up...' : 'Sign Up'}</button>
+          <button className={styles.btnSign} disabled={isFormInvalid() || submitting}>{submitting ? 'Signing up...' : 'Sign Up'}</button>
           <button className={styles.btnCancel} onClick={() => navigate("/")}>Cancel</button>
         </div>
       </form>

@@ -1,18 +1,28 @@
 h1 {
     font-family: "Chelsea Market", system-ui;
+    text-align: left;
+    position: absolute;
+    margin-left: 4rem;
+    margin-bottom: 2rem;
 }
-.PageSignUp{
-    background-image: url('../images/image1.jpg');
+.PageSignin{
+    background-image: url('../images/BAHRAIN\ GATE.jpg');
     background-repeat: no-repeat;
-    background-position: left;
+    background-position: right;
     background-size: 30%;
     min-height: 100vh;
 }
 
+.content{
+    text-align: left;
+ 
+}
 
-.formSignUp {
+.SignInForm {
+    margin-top: 4rem;
     display: inline-flex;
     flex-direction: column;
+    justify-content: left;
     align-items: center;
     background-color: var(--Dark-Red);
     border-radius: 1rem;
