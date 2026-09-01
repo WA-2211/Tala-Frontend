@@ -14,7 +14,6 @@ function Allplaces() {
     const [error, setError] = useState(false)
     const [coords, setCoords] = useState(null)
     const [nearby, setNearby] = useState(false)
-    
     const [filter, setFilter] = useState({
         category: '',
         priceRange: '',
@@ -53,7 +52,7 @@ function Allplaces() {
         }))
     }
 
-    function handleNearMePlaces(){
+    function handleNearMePlaces() {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const addCoordinates = {
@@ -70,16 +69,19 @@ function Allplaces() {
         )
     }
 
+    function handleShowFilters() {
+        setShowFilter(true)
+    }
     async function loadPlaces() {
         try {
             setLoading(true)
             setError(false)
 
             let res
-            if(nearby && coords){
+            if (nearby && coords) {
                 res = await getNearMePlaces(coords.long, coords.lat, filter)
             }
-            else{
+            else {
                 res = await getAllPlaces(filter)
             }
             setPlaces(res)
@@ -106,6 +108,7 @@ function Allplaces() {
     return (
         <main>
             <div>
+                <button onClick={handleShowFilters}>Filters</button>
                 <h4>By category:</h4>
                 <div>
                     <Tag.CheckableTagGroup
@@ -138,19 +141,19 @@ function Allplaces() {
                 </div>
             </div>
 
-                    <div>
+            <div>
                 <h4>By Location:</h4>
                 <div>
-        <Tag.CheckableTag 
-        checked={nearby} onChange={(checked) =>{
-            if(checked){
-                handleNearMePlaces()
-            } else{
-                setNearby(false)
-            }
-        }}>
-          Near Me
-        </Tag.CheckableTag>
+                    <Tag.CheckableTag
+                        checked={nearby} onChange={(checked) => {
+                            if (checked) {
+                                handleNearMePlaces()
+                            } else {
+                                setNearby(false)
+                            }
+                        }}>
+                        Near Me
+                    </Tag.CheckableTag>
                 </div>
             </div>
 

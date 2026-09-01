@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { signUp } from "../services/authService";
-
+import styles from '../styles/SignupPage.module.css'
 function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -39,12 +39,13 @@ function Signup() {
   };
 
   return (
-    <main>
-      <h1>Sign Up</h1>
+    <main className={styles.PageSignUp}>
+      <div className={styles.content}>
+      <h1>Create New Account</h1>
       <p className="error">{error}</p>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
+      <form onSubmit={handleSubmit} className={styles.formSignUp}>
+        <div className={styles.formElement}>
+          <label htmlFor="username" className={styles.formLabel}>Username</label>
           <input
             type="text"
             id="username"
@@ -52,10 +53,11 @@ function Signup() {
             name="username"
             onChange={handleChange}
             required
+            className={styles.formInput}
           />
         </div>
-        <div>
-          <label htmlFor="email">Email:</label>
+        <div className={styles.formElement}> 
+          <label htmlFor="email" className={styles.formLabel}>Email</label>
           <input
             type="email"
             placeholder="example@domain.com"
@@ -65,10 +67,11 @@ function Signup() {
             name="email"
             onChange={handleChange}
             required
+            className={styles.formInput}
           />
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className={styles.formElement}>
+          <label htmlFor="password" className={styles.formLabel}>Password</label>
           <input
             type="password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -78,10 +81,11 @@ function Signup() {
             name="password"
             onChange={handleChange}
             required
+            className={styles.formInput}
           />
         </div>
-        <div>
-          <label htmlFor="confirm">Confirm Password:</label>
+        <div className={styles.formElement}>
+          <label htmlFor="confirm" className={styles.formLabel}>Confirm Password</label>
           <input
             type="password"
             id="confirm"
@@ -89,13 +93,15 @@ function Signup() {
             name="passwordConf"
             onChange={handleChange}
             required
+            className={styles.formInput}
           />
         </div>
-        <div>
-          <button disabled={isFormInvalid() || submitting}>{submitting ? 'Signing up...' : 'Sign Up'}</button>
-          <button onClick={() => navigate("/")}>Cancel</button>
+        <div className={styles.btnContainer}>
+          <button className={styles.btn} disabled={isFormInvalid() || submitting}>{submitting ? 'Signing up...' : 'Sign Up'}</button>
+          <button className={styles.btnCancel} onClick={() => navigate("/")}>Cancel</button>
         </div>
       </form>
+      </div>
     </main>
   );
 }

@@ -1,7 +1,33 @@
-.error{
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Cormorant+Upright:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --Dark-Red: #560B19;
+    --Red:#7B0003;
+    --Light-Yellow: #F2E5C5;
+    --Dark-Yellow: #F5D5AB;
+    --Pink: #B98778;
+    --Dark-pink: #9E4C3F;
+    --Pink-Red: #ad2f4d;
+    --Dark-Pink-Red: #75172D;
+    --White: #EADFCE;
+    --Transparent:#eadfce23;
+    --Shadow: rgba(0, 0, 0, 0.2)
+}
+
+.error {
     color: red
 }
 
-nav a{
+nav a {
     margin-right: 10px
+}
+
+body {
+    background-color: var(--Dark-Red);
+    color: var(--Light-Yellow);
+    font-family: "Cormorant Upright", serif;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    
 }

@@ -5,6 +5,7 @@ function Navbar() {
   const { logout, user} = useAuth()
   return (
     <nav>
+      <a>Logo</a>
       {user 
       ? 
       (<>

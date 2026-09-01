@@ -1,0 +1,80 @@
+h1 {
+    font-family: "Chelsea Market", system-ui;
+}
+.PageSignUp{
+    background-image: url('../images/image1.jpg');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 30%;
+    min-height: 100vh;
+}
+
+
+.formSignUp {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--Dark-Red);
+    border-radius: 1rem;
+    padding: 2rem;
+
+}
+
+.formElement {
+    margin: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.formInput {
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    width: 15rem;
+    height: 1rem;
+}
+
+.formLabel {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.btnContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.btn {
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem;
+    width: 6rem;
+    height: 2rem;
+    color: black;
+    background-color: var(--Dark-Yellow);
+    font-family: "Cormorant Upright", serif;
+    font-weight: 700;
+}
+
+.btn:hover{
+    cursor: pointer;
+    background-color: var(--Light-Yellow) ;
+}
+
+.btnCancel{
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem;
+    width: 6rem;
+    height: 2rem;
+    font-family: "Cormorant Upright", serif;
+    font-weight: 700;
+    background-color: var(--Pink-Red);
+}
+
+.btnCancel:hover{
+    cursor: pointer;
+    background-color: var(--Dark-Pink-Red);
+}
