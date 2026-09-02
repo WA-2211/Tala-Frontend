@@ -129,12 +129,14 @@ function PlanDetails() {
                         <h3>{plan.place.name}</h3>
                         {tagStatus(plan.status)}
                     </div>
+                    <div className={styles.linkContainer}>
+                    <p style={{fontWeight:'700'}}>Invite Friends:</p>
                     <span>
                         <Paragraph copyable={{ text: shareUrlLink }} className={styles.inviteLink}>
                             {shareUrlLink}
                         </Paragraph >
                     </span>
-
+                    </div>
                     <p className={styles.planData}>Planned on: {plan.scheduledDate ? new Date(plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
                     <h3 style={{ marginTop: '1.2rem' }}>Edit Plan Details</h3>
 

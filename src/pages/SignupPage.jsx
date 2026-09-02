@@ -32,7 +32,12 @@ function Signup() {
 
       const signedInUser = await signIn({email, password})
       setUser(signedInUser)
-      navigate('/recommended')
+      if(signedInUser.role === 'admin'){
+        navigate('/admin/place')
+      }
+      else{
+        navigate('/recommended')
+      }
     } catch (err) {
       setError(err.response.data.message);
       setSubmitting(false)

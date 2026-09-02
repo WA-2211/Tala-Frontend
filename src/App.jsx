@@ -17,7 +17,6 @@ import MyInvites from "./pages/invite/MyInvites";
 import CreatePlace from "./pages/admin/CreatePlace";
 import EditPlace from "./pages/admin/EditPlace";
 import ManagePlaces from "./pages/admin/ManagePlaces";
-import Dashboard from "./pages/Dashboard";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
 import ProtectedRoute from "./components/ProtectedRoute";

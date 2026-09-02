@@ -29,7 +29,12 @@ const SignInForm = ({}) => {
       const signedInUser = await signIn(formData);
 
       setUser(signedInUser);
-      navigate('/recommended');
+      if(signedInUser.role === 'admin'){
+        navigate('/admin/place')
+      }
+      else{
+        navigate('/recommended');
+      }
     } catch (err) {
       console.log(`Error: ${err}`)
       setError(err?.response?.data?.message);

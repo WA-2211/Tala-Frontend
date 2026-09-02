@@ -115,6 +115,7 @@
     cursor: pointer;
 }
 
+.linkContainer{}
 .inviteLink{
     display: inline-block;
     border-radius: 1rem;
