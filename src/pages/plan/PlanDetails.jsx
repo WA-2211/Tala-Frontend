@@ -5,6 +5,8 @@ import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Typography, Tag } from 'antd'
 import { getOnePlan, updatePlan, deletePlan } from '../../services/planService'
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import styles from '../../styles/PlanDetails.module.css'
+
 function PlanDetails() {
     const navigate = useNavigate()
     const { user } = useAuth()
@@ -61,13 +63,13 @@ function PlanDetails() {
         }
     }
 
-    async function handleDeletePlan(planId){
+    async function handleDeletePlan(planId) {
         try {
             const newPlanList = await deletePlan(planId)
             navigate('/plan')
         } catch (err) {
             setError(err?.response?.data?.message)
-            
+
         }
     }
     async function updatePlanDetails(planId) {
@@ -120,24 +122,28 @@ function PlanDetails() {
     if (error) return <p>ERROR: {error}</p>
 
     return (
-        <main>
+        <main className={styles.main}>
             {plan && (
-                <>
-                    <h3>{plan.place.name}</h3>
+                <div className={styles.planContainer}>
+                    <div className={styles.planTitle}>
+                        <h3>{plan.place.name}</h3>
+                        {tagStatus(plan.status)}
+                    </div>
                     <span>
-                        <Paragraph copyable={{ text: shareUrlLink }}>
+                        <Paragraph copyable={{ text: shareUrlLink }} className={styles.inviteLink}>
                             {shareUrlLink}
                         </Paragraph >
                     </span>
-                    <p>Planned on: {plan.scheduledDate? new Date(plan.scheduledDate).toLocaleDateString('en-BH', options): '- No date added yet -'}</p>
-                    {tagStatus(plan.status)}
-                    <h3>Edit Plan Details</h3>
-                    <button onClick={() =>handleDeletePlan(planId)}>Delete</button>
-                    <button onClick={handleShowEditForm}>Edit</button>
+
+                    <p className={styles.planData}>Planned on: {plan.scheduledDate ? new Date(plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
+                    <h3 style={{ marginTop: '1.2rem' }}>Edit Plan Details</h3>
+
+                    <button className={styles.btnDelete} onClick={() => handleDeletePlan(planId)}>Delete</button>
+                    <button className={styles.btnEdit} onClick={handleShowEditForm}>Edit</button>
                     {editForm && (
                         <>
-                            <form onSubmit={handlesubmit}>
-                                <div>
+                            <form onSubmit={handlesubmit} className={styles.editForm}>
+                                <div className={styles.formElement}>
                                     <label htmlFor='scheduledDate'>Scheduled Date:</label>
                                     <input
                                         type='date'
@@ -147,17 +153,19 @@ function PlanDetails() {
                                         autoComplete='off'
                                         onChange={handleChange}
                                         required
+                                        className={styles.formInput}
                                     />
                                 </div>
 
-                                <div>
+                                <div className={styles.formElement}>
                                     <label htmlFor='status'>Plan Status:</label>
-                                    <select 
-                                    name='status'
-                                    id='status' 
-                                    value={formData.status} 
-                                    onChange={handleChange}
-                                    required
+                                    <select
+                                        name='status'
+                                        id='status'
+                                        value={formData.status}
+                                        onChange={handleChange}
+                                        required
+                                        className={styles.formInput}
                                     >
                                         <option value='scheduled'>scheduled</option>
                                         <option value='completed'>completed</option>
@@ -165,14 +173,16 @@ function PlanDetails() {
                                     </select>
                                 </div>
 
-                                <button type='button' onClick={handleHideEditForm}>Cancel</button>
-                                <button type='submit'>Save Changes</button>
+                                <div className={styles.btnContainer}>
+                                    <button type='button' onClick={handleHideEditForm} className={styles.btnCancel}>Cancel</button>
+                                    <button className={styles.btnSave} type='submit'>Save Changes</button>
+                                </div>
                             </form>
                         </>
                     )}
 
 
-                </>
+                </div>
             )}
         </main>
     )

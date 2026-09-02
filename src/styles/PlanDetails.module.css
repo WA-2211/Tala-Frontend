@@ -1,0 +1,131 @@
+.main{
+    margin: 0 auto;
+}
+
+.planContainer{
+    background-color: var(--Transparent);
+    border: 1px solid var(--Pink);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.planContainer h3{
+    font-family: "Chelsea Market", system-ui;
+    font-size: 1.5rem;
+    margin-top: 0.2rem;
+}
+
+.planData{
+    margin-bottom: 1rem;
+}
+
+.btnEdit{
+    background-color: var(--Dark-Yellow);
+    text-decoration: none;
+    border-radius: 1rem;
+    border: none;
+    padding: 0.4rem 1rem;
+    color: var(--Dark-Pink-Red);
+    font-weight: 700;
+}
+
+
+.btnEdit:hover{
+    background-color: #bd9f77 ;
+    cursor: pointer;
+}
+
+.btnDelete{
+    background-color: var(--Pink-Red);
+    text-decoration: none;
+    border-radius: 1rem;
+    border: none;
+    padding: 0.4rem 1rem;
+    color: var(--White);
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+.btnDelete:hover{
+    background-color: #d94c4c ;
+    cursor: pointer;
+}
+
+.editForm{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formElement{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formInput label{
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--Pink);
+}
+
+.formInput {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.btnContainer{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btnSave{
+    background-color: var(--Dark-Yellow);
+    text-decoration: none;
+    border-radius: 1rem;
+    border: none;
+    padding: 0.4rem 1rem;
+    color: var(--Dark-Pink-Red);
+    font-weight: 700;
+}
+
+.btnSave:hover{
+    background-color: #bd9f77 ;
+    cursor: pointer;
+}
+
+.btnCancel{
+    background-color: var(--Pink-Red);
+    text-decoration: none;
+    border-radius: 1rem;
+    border: none;
+    padding: 0.4rem 1rem;
+    color: var(--White);
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+.btnCancel:hover{
+    background-color: #d94c4c ;
+    cursor: pointer;
+}
+
+.inviteLink{
+    display: inline-block;
+    border-radius: 1rem;
+    background-color: var(--White);
+    color: var(--Pink);
+    font-weight: 400;
+    padding: 0.2rem 0.5rem;
+}
+
+.planTitle{
+    display: flex;
+    align-items: center;
+    gap: 1rem
+}
