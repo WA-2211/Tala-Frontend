@@ -39,19 +39,26 @@
     align-items: center;
     gap: 1rem
 }
-/* .link{
+.link{
     text-decoration: none;
-    color: var(--Light-Yellow);
+    background-color: var(--Dark-Yellow);
+    color: var(--Dark-Pink-Red);
+    border-radius: 1rem;
+    padding: 0.5rem 1.25rem;
     font-weight: 700;
 }
 .link:hover{
+    background-color: var(--Light-Yellow);
     color: var(--Pink);
     cursor: pointer;
-    text-decoration: underline;
-} */
+}
+
 .noPlans{
     text-align: center;
     color: var(--White);
+    /* font-weight: 500; */
+    font-size: 35px;
+    margin-bottom: 2rem;
 }
 
 .inviteLink{
