@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin } from 'antd'
 import { createPlace } from '../../services/placeService'
 import { latLng } from 'leaflet'
+import styles from '../../styles/PlaceForm.module.css'
 
 function CreatePlace() {
     const navigate = useNavigate()
@@ -100,10 +101,10 @@ function CreatePlace() {
     if (error) return <p>ERROR: {error}</p>
 
     return (
-        <main>
+        <main className={styles.main}>
             <h1>Add a Place</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.formElement}>
                     <label htmlFor='name'>Name:</label>
                     <input
                         type='text'
@@ -113,10 +114,11 @@ function CreatePlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     ></input>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='category'>Category:</label>
                     <select
                         type='text'
@@ -126,6 +128,7 @@ function CreatePlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     >
                         <option value=''>-Select Category-</option>
                         <option value='cafe'>Cafe</option>
@@ -144,7 +147,7 @@ function CreatePlace() {
                     </select>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='description'>Description:</label>
                     <textarea
                         name='description'
@@ -153,10 +156,12 @@ function CreatePlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formTextarea}
+
                     ></textarea>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='priceRangeCategory'>Price Range - Category:</label>
                     <select
                         id='priceRangeCategory'
@@ -165,6 +170,7 @@ function CreatePlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     >
                         <option value=''>-Select Category-</option>
                         <option value='affordable'>Affordable</option>
@@ -174,7 +180,7 @@ function CreatePlace() {
                     </select>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='priceRangeAverageBHD'>Price Range - Average BHD:</label>
                     <input
                         type='number'
@@ -184,9 +190,10 @@ function CreatePlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     ></input>
                 </div>
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='tags'>Tags:</label>
                     <input
                         type='text'
@@ -197,10 +204,11 @@ function CreatePlace() {
                         onChange={handleChange}
                         required
                         placeholder='Separate tags with a comma'
+                        className={styles.formInput}
                     ></input>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='location.lat'>Location Latitude:</label>
                     <input
                         type='number'
@@ -210,10 +218,11 @@ function CreatePlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     ></input>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='location.long'>Location Longitude:</label>
                     <input
                         type='number'
@@ -223,10 +232,11 @@ function CreatePlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     ></input>
                 </div>
 
-                <button type='submit'>Submit</button>
+                <button type='submit' className={styles.btnSubmit}>Submit</button>
             </form>
         </main>
     )
