@@ -1,0 +1,88 @@
+.main{
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.addLink {
+    display: inline-block;
+    background-color: var(--Dark-Yellow);
+    color: var(--Dark-Red);
+    border-radius: 1rem;
+    padding: 0.4rem 1.1rem;
+    text-decoration: none;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.addLink:hover {
+    background-color: var(--Light-Yellow);
+    cursor: pointer;
+}
+
+.placeContainer{
+    background-color: var(--Transparent);
+    border: 1px solid var(--Pink);
+    border-radius: 1rem;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.placeContainer h3{
+    font-family: "Chelsea Market", system-ui;
+}
+
+.placeContainer h3 a{
+    text-decoration: none;
+    color:var(--Light-Yellow)
+}
+
+.placeContainer h3 a:hover{
+    color: var(--Pink);
+    cursor: pointer;
+}
+
+.btnContainer{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btnEdit {
+    background-color: var(--Dark-Yellow);
+    color: var(--Dark-Pink-Red);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem 1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btnEdit:hover {
+    background-color: var(--Light-Yellow);
+}
+
+.btnDelete {
+    background-color: var(--Pink-Red);
+    color: var(--White);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem 1rem;
+    font-weight: 700;
+}
+
+.btnDelete:hover {
+    background-color: var(--Dark-Pink-Red);
+}
+
+.tags {
+    display: inline-flex;
+    background-color: var(--Pink);
+    padding: 0.2rem 0.5rem;
+    border-radius: 1rem;
+    font-weight: 500;
+}
+
+.price {
+    color: var(--Dark-Yellow);
+    font-size: 0.9rem;
+    font-weight: 700;
+}

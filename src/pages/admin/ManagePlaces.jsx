@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin } from 'antd'
 import { getAllPlaces, deletePlace } from '../../services/placeService'
+import styles from '../../styles/ManagePlaces.module.css'
 
 function ManagePlaces() {
     const navigate = useNavigate()
@@ -57,17 +58,21 @@ function ManagePlaces() {
 
 
     return (
-        <main>
+        <main className={styles.main}>
             <h1>Manage Places</h1>
-            <Link to='/admin/place/create'>Add New Place</Link>
+            <Link to='/admin/place/create' className={styles.addLink}>Add New Place</Link>
             {places.map((onePlace) =>
-                <div key={onePlace._id}>
+                <div key={onePlace._id} className={styles.placeContainer}>
                     <h3><Link to={`/place/${onePlace._id}`}>{onePlace.name}</Link></h3>
-                    <button onClick={() => handleDelete(onePlace._id)}>Delete</button>
-                    <button onClick={() => handleEdit(onePlace._id)}>Edit</button>
-                    <p>{onePlace.tags.join(' / ')} </p>
-                    <p>{onePlace.description}</p>
-                    <p>Price Range: {onePlace.priceRange.category} , {onePlace.priceRange.averageBHD}BHD average</p>
+                    
+                    <div className={styles.btnContainer}>
+                    <button className={styles.btnDelete} onClick={() => handleDelete(onePlace._id)}>Delete</button>
+                    <button className={styles.btnEdit} onClick={() => handleEdit(onePlace._id)}>Edit</button>
+                    </div>
+                    
+                    <p className={styles.tags}>{onePlace.tags.join(' / ')} </p>
+                    <p className={styles.description}>{onePlace.description}</p>
+                    <p className={styles.price}>Price Range: {onePlace.priceRange.category} , {onePlace.priceRange.averageBHD}BHD average</p>
 
                 </div>
             )}
