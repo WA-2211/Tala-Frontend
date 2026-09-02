@@ -20,8 +20,18 @@ nav{
     text-underline-offset: 0.3rem;
 }
 
-.btnSignout{
+
+
+.btnSignout {
     background-color: var(--Pink-Red);
+    color: var(--White);
     border: none;
-    border-radius: 5px;
+    border-radius: 1rem;
+    padding: 0.5rem 1.25rem;
+    font-weight: 700;
+}
+
+.btnSignout:hover {
+    background-color: var(--Dark-Pink-Red);
+    cursor: pointer;
 }
