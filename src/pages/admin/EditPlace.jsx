@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin } from 'antd'
 import { updatePlace, getOnePlace } from '../../services/placeService'
+import styles from '../../styles/EditPlace.module.css'
 
 function EditPlace() {
     const navigate = useNavigate()
@@ -101,10 +102,10 @@ function EditPlace() {
     if (error) return <p>ERROR: {error}</p>
 
     return (
-        <main>
+        <main className={styles.main}>
             <h1>Edit Place</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.formElement}>
                     <label htmlFor='name'>Name:</label>
                     <input
                         type='text'
@@ -114,10 +115,11 @@ function EditPlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     ></input>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='category'>Category:</label>
                     <select
                         type='text'
@@ -127,6 +129,7 @@ function EditPlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     >
                         <option value=''>-Select Category-</option>
                         <option value='cafe'>Cafe</option>
@@ -145,7 +148,7 @@ function EditPlace() {
                     </select>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='description'>Description:</label>
                     <textarea
                         name='description'
@@ -154,10 +157,11 @@ function EditPlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formTextarea}
                     ></textarea>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='priceRangeCategory'>Price Range - Category:</label>
                     <select
                         id='priceRangeCategory'
@@ -166,6 +170,7 @@ function EditPlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     >
                         <option value=''>-Select Category-</option>
                         <option value='affordable'>Affordable</option>
@@ -175,7 +180,7 @@ function EditPlace() {
                     </select>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='priceRangeAverageBHD'>Price Range - Average BHD:</label>
                     <input
                         type='number'
@@ -185,9 +190,10 @@ function EditPlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     ></input>
                 </div>
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='tags'>Tags:</label>
                     <input
                         type='text'
@@ -198,10 +204,11 @@ function EditPlace() {
                         onChange={handleChange}
                         required
                         placeholder='Separate tags with a comma'
+                        className={styles.formInput}
                     ></input>
                 </div>
 
-                 <div>
+                 <div className={styles.formElement}>
                     <label htmlFor='location.lat'>Location Latitude:</label>
                     <input
                         type='number'
@@ -211,10 +218,11 @@ function EditPlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     ></input>
                 </div>
 
-                <div>
+                <div className={styles.formElement}>
                     <label htmlFor='location.long'>Location Longitude:</label>
                     <input
                         type='number'
@@ -224,11 +232,15 @@ function EditPlace() {
                         autoComplete='off'
                         onChange={handleChange}
                         required
+                        className={styles.formInput}
                     ></input>
                 </div>
 
-                <button type='button' onClick={() => handleCancel()}>Cancel</button>
-                <button type='submit'>Submit</button>
+                <div className={styles.btnContainer}>
+                <button className={styles.btnCancel} type='button' onClick={() => handleCancel()}>Cancel</button>
+                <button className={styles.btnSubmit} type='submit'>Submit</button>
+           </div>
+           
             </form>
         </main>
     )
