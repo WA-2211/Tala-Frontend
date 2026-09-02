@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Typography, Tag } from 'antd'
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { createInvite, getAllInvites } from '../../services/inviteService'
+import styles from '../../styles/CreateInvite.module.css'
 
 function CreateInvite() {
     const navigate = useNavigate()
@@ -89,20 +90,31 @@ function CreateInvite() {
     if (error) return <p>ERROR: {error}</p>
     return (
 
-        <main>
-           <form onSubmit={handlesubmit}>
-            <div>
+        <main className={styles.main}>
+           <form onSubmit={handlesubmit}  className={styles.form}>
+            <div  className={styles.formElement}>
                 <label htmlFor='username'>Send To:</label>
-                <input type='text' id='username' name='username' value={formData.username} autoComplete='off' onChange={handleChange} required></input>
+                <input 
+                type='text' 
+                id='username' 
+                name='username' 
+                value={formData.username} 
+                autoComplete='off' 
+                onChange={handleChange} 
+                required
+                 className={styles.formInput}
+                >
+
+                </input>
             </div>
-            <button type='submit'>Invite Friends</button>
+            <button className={styles.btnInvite} type='submit'>Invite Friends</button>
            </form>
-           <hr></hr>
+           <hr className={styles.hr}></hr>
            <h3>Invitations</h3>
           {invites.length === 0 ? <p>You have no invites yet - Invite friends Now!</p>
                 : invites.map((oneInvite) =>{   
                     return (
-                        <div key={oneInvite._id}>
+                        <div key={oneInvite._id}  className={styles.inviteContainer}>
                             <h4>{oneInvite.user.username}</h4>
                             {tagStatus(oneInvite.status)}
                            
