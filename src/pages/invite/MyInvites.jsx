@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Typography, Tag } from 'antd'
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { getMyinvites, updateInvite } from '../../services/inviteService'
+import styles from '../../styles/MyInvites.module.css'
 
 function MyInvites() {
     const navigate = useNavigate()
@@ -71,22 +72,24 @@ function MyInvites() {
     </Flex>
     if (error) return <p>ERROR: {error}</p>
     return (
-        <div>
-            {invites.length === 0 ? <p>You have not been invited yet!</p>
+        <main className={styles.main}>
+            <h1>My Invitations</h1>
+            {invites.length === 0 ? <p className={styles.noInvites}>You have not been invited yet!</p>
                 : invites.map((oneInvite) => {
                     return (
-                        <div key={oneInvite._id}>
-                            <p><Link to={`/place/${oneInvite.plan.place._id}`}>{oneInvite.plan.place.name}</Link></p>
-                    <p>{oneInvite.plan.scheduledDate ? new Date(oneInvite.plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
+                        <div key={oneInvite._id} className={styles.inviteContainer}>
+                            <h3><Link to={`/place/${oneInvite.plan.place._id}`}>{oneInvite.plan.place.name}</Link></h3>
+                            <p className={styles.date}>{oneInvite.plan.scheduledDate ? new Date(oneInvite.plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
                             {tagStatus(oneInvite.status)}
 
-                            <button onClick={() => handleStatus(oneInvite._id, 'accepted')} disabled={oneInvite.status === 'accepted'}>Accept</button>
-                            <button onClick={() => handleStatus(oneInvite._id, 'rejected')} disabled={oneInvite.status === 'rejected'}>Reject</button>
-
+                            <div className={styles.btnContainer}>
+                                <button className={styles.btnAccept} onClick={() => handleStatus(oneInvite._id, 'accepted')} disabled={oneInvite.status === 'accepted'}>Accept</button>
+                                <button className={styles.btnReject} onClick={() => handleStatus(oneInvite._id, 'rejected')} disabled={oneInvite.status === 'rejected'}>Reject</button>
+                            </div>
                         </div>
                     )
                 }
-                )}          </div>
+                )}          </main>
     )
 }
 

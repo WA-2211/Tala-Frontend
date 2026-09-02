@@ -1,0 +1,76 @@
+.main{
+    margin: 0 auto;
+}
+
+.inviteContainer {
+    background-color: var(--Transparent);
+    border: 1px solid var(--Pink);
+    border-radius: 1rem;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.inviteContainer h3 {
+    font-family: "Chelsea Market", system-ui;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.inviteContainer h3 a {
+    text-decoration: none;
+    color: var(--Light-Yellow);
+}
+
+.inviteContainer h3 a:hover {
+    color: var(--Pink);
+}
+
+.inviteDate {
+    color: var(--Dark-Yellow);
+    font-size: 0.9rem;
+}
+
+.btnContainer {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.btnAccept {
+    background-color: var(--Dark-Yellow);
+    color: var(--Dark-Pink-Red);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem 1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btnAccept:hover {
+    background-color: var(--Light-Yellow);
+}
+
+.btnReject {
+    background-color: var(--Pink-Red);
+    color: var(--White);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem 1rem;
+    font-weight: 700;
+}
+
+.btnReject:hover {
+    background-color: var(--Dark-Pink-Red);
+    cursor: pointer;
+}
+
+.btnAccept:disabled, .btnReject:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.noInvites {
+    text-align: center;
+    color: var(--White);
+}
