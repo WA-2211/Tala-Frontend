@@ -75,22 +75,26 @@ function AllPlans() {
                 : plans.map((onePlan) => {
                     const shareUrlLink = `${url}/plan/invite/${onePlan.inviteLink}`
                     return (
-                        <div key={onePlan._id} className={styles.planContainer}>
+                        <Link to={`/plan/${onePlan._id}`} key={onePlan._id} className={styles.planContainer}>
                             <div className={styles.planTitle}>
                                 <h3><Link to={`/plan/${onePlan._id}`}>{onePlan.place?.name || 'Place is not available anymore'}</Link></h3>
                                 {tagStatus(onePlan.status)}
                             </div>
+                            
                             <p className={styles.planData}>
                                 {onePlan.scheduledDate ? new Date(onePlan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}
                             </p>
-                            <h4>Invite Friends</h4>
-                            <span>
-                                <Paragraph copyable={{ text: shareUrlLink }} className={styles.inviteLink}>
-                                    {shareUrlLink}
-                                </Paragraph >
-                            </span>
 
-                        </div>
+                            <div className={styles.linkContainer}>
+
+                                <h4>Invite Friends</h4>
+                                <span>
+                                    <Paragraph copyable={{ text: shareUrlLink }} className={styles.inviteLink}>
+                                        {shareUrlLink}
+                                    </Paragraph >
+                                </span>
+                            </div>
+                        </Link>
                     )
                 }
                 )}

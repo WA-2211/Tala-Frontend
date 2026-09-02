@@ -76,15 +76,16 @@ function MyInvites() {
             <h1>My Invitations</h1>
             {invites.length === 0 ? <p className={styles.noInvites}>You have not been invited yet!</p>
                 : invites.map((oneInvite) => {
+                    const hasPlace = oneInvite.plan && oneInvite.plan.place
                     return (
                         <div key={oneInvite._id} className={styles.inviteContainer}>
                             <h3>
-                                {oneInvite.place ? (
+                                {hasPlace ? (
                                     <Link to={`/place/${oneInvite.plan.place._id}`}>{oneInvite.plan.place.name}</Link>
-                                ) : ('Plac is no longer available')}
+                                ) : ('Place is no longer available')}
                             </h3>
 
-                            <p className={styles.date}>{oneInvite.plan.scheduledDate ? new Date(oneInvite.plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
+                            <p className={styles.date}>{oneInvite.plan?.scheduledDate ? new Date(oneInvite.plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
                             {tagStatus(oneInvite.status)}
 
                             <div className={styles.btnContainer}>

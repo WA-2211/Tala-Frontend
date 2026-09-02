@@ -209,6 +209,8 @@ function PlaceDetails() {
                                         type='number'
                                         name='rating'
                                         id='rating'
+                                        min={0}
+                                        max={5}
                                         value={reviewFormData.rating}
                                         autoComplete='off'
                                         onChange={handleChange}
@@ -244,11 +246,14 @@ function PlaceDetails() {
                     <h3>Recent Reviews</h3>
                     {reviews.map((oneReview) =>
                         <div key={oneReview._id} className={styles.reviewContainer}>
+                            <div className={styles.header}>
                             <p className={styles.reviewUser}>{oneReview.user?.username}</p>
                             <Flex align='center' gap='small'>
                                 <Rate allowHalf disabled value={oneReview.rating} />
                                 <span>{oneReview.rating} / 5</span>
                             </Flex>
+
+                            </div>
                             <p className={styles.reviewText}>{oneReview.reviewText}</p>
                         </div>
                     )}

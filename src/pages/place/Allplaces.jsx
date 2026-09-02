@@ -82,7 +82,7 @@ function Allplaces() {
 
             let res
             if (nearby && coords) {
-                res = await getNearMePlaces(coords.long, coords.lat, filter)
+                res = await getNearMePlaces(coords.lat, coords.long, filter)
             }
             else {
                 res = await getAllPlaces(filter)

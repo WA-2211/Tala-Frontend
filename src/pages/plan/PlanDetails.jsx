@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router'
+import { useParams, useNavigate, Link } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Typography, Tag } from 'antd'
 import { getOnePlan, updatePlan, deletePlan } from '../../services/planService'
@@ -132,7 +132,7 @@ function PlanDetails() {
                     <p className={styles.planData}>{plan.scheduledDate ? `Planned on: ${ new Date(plan.scheduledDate).toLocaleDateString('en-BH', options) }`: '- No date added yet -'}</p>
 
                     <div className={styles.linkContainer}>
-                        <p style={{ fontWeight: '700', textAlign:'left', fontSize:'25px' }}>Invite Friends</p>
+                        <Link to={`/plan/${planId}/invite`} className={styles.link}>Invite Friends</Link>
                         <span>
                             <Paragraph copyable={{ text: shareUrlLink }} className={styles.inviteLink}>
                                 {shareUrlLink}

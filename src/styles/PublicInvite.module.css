@@ -18,8 +18,10 @@
 }
 
 .inviteContainer h3 a {
-    text-decoration: none;
+    text-decoration: underline;
     color: var(--Light-Yellow);
+    text-underline-offset: 0.3rem;
+
 }
 
 .inviteContainer h3 a:hover {
@@ -49,4 +51,24 @@
     color: var(--Dark-Pink-Red);
     font-weight: 700;
     text-decoration: underline;
+}
+
+.link{
+    color: var(--Pink-Red);
+    font-weight: 700;
+}
+
+.btnAccept{
+border: none;
+    border-radius: 1rem;
+    padding: 0.5rem 0.7rem;
+     background-color: var(--Pink-Red);
+    color: var(--Light-Yellow);
+    margin-right: 0.5rem;
+}
+
+.btnAccept:hover{
+  background-color: var(--Light-Yellow); 
+    color: var(--Dark-Pink-Red);
+    cursor: pointer;
 }

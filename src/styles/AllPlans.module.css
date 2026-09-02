@@ -1,45 +1,55 @@
-.main{
+.main {
     margin: 0 auto;
 }
 
-.planContainer{
+.planContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
     background-color: var(--Transparent);
     border: 1px solid var(--Pink);
     border-radius: 1rem;
     padding: 1rem;
-    text-align: left;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    text-decoration: none;
+    color: inherit;
 }
 
-.planContainer h3{
+.planContainer:hover {
+    background-color: #B98778;
+    cursor: pointer;
+}
+
+.planContainer h3 {
     font-family: "Chelsea Market", system-ui;
     font-size: 1.5rem;
     margin-top: 0;
     margin-bottom: 0.5rem;
 }
 
-.planContainer a{
+.planContainer a {
     text-decoration: none;
     color: var(--Light-Yellow);
 }
 
-.planContainer a:hover{
+.planContainer a:hover {
     color: var(--Pink);
     cursor: pointer;
 }
 
-.planData{
+.planData {
     font-size: 1.2rem;
-      margin: 0.25rem 0 0.75rem;
+    margin: 0.25rem 0 0.75rem;
 
 }
 
-.planTitle{
+.planTitle {
     display: flex;
     align-items: center;
     gap: 1rem
 }
-.link{
+
+.link {
     text-decoration: none;
     background-color: var(--Dark-Yellow);
     color: var(--Dark-Pink-Red);
@@ -47,25 +57,33 @@
     padding: 0.5rem 1.25rem;
     font-weight: 700;
 }
-.link:hover{
+
+.link:hover {
     background-color: var(--Light-Yellow);
     color: var(--Pink);
     cursor: pointer;
 }
 
-.noPlans{
+.noPlans {
     text-align: center;
     color: var(--White);
     /* font-weight: 500; */
     font-size: 35px;
     margin-bottom: 2rem;
 }
+.linkContainer{
+        background-color: var(--Transparent);
+    border: 1px solid var(--Pink);
+    border-radius: 1rem;
+    padding: 1rem;
+}
 
-.inviteLink{
+.inviteLink {
     display: inline-block;
     border-radius: 1rem;
     background-color: var(--White);
-    color: var(--Pink);
+    color: var(--Dark-Pink-Red);
     font-weight: 400;
+    font-size: 20px;
     padding: 0.2rem 0.5rem;
 }

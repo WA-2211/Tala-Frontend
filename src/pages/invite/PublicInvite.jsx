@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Typography, Tag } from 'antd'
-import { getPlanByLink } from '../../services/inviteService'
+import { getPlanByLink, acceptPublicInvite } from '../../services/inviteService'
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import styles from '../../styles/Publicinvite.module.css'
 
@@ -12,6 +12,7 @@ function PublicInvite() {
     const { user } = useAuth()
     const { inviteLink } = useParams()
     const [plan, setPlan] = useState({})
+    const [joinPlan, setJoinPlan] = useState(false)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const { Paragraph } = Typography
@@ -52,6 +53,18 @@ function PublicInvite() {
         }
     }
 
+    async function joinPlanByLink(){
+        try {
+            setJoinPlan(true)
+            setError(false)
+
+            await acceptPublicInvite(inviteLink)
+            navigat('/invite')
+        } catch (err) {
+            setError(err?.response?.data?.message)
+            setJoinPlan(false)
+        }
+    }
     useEffect(() => {
         loadInviteDetails()
 
@@ -71,14 +84,17 @@ function PublicInvite() {
                     <p className={styles.date}>{plan.scheduledDate ? `Planned on: ${new Date(plan.scheduledDate).toLocaleDateString('en-BH', options)}` : '- No date added yet -'}</p>
                     <p className={styles.description}>{plan.place.description}</p>
 
-                    {!user && (
-                        <>
-                            <p className={styles.message}>Respond to this invite by <Link to='/sign-in'>Signing-In</Link></p>
-                        </>
+                    {user ? (
+                        
+                        <button className={styles.btnAccept} onClick={joinPlanByLink} disabled={joinPlan}>{joinPlan? 'Joining ..' : 'Accept Invitation'}</button>
+                        ):(
+                            
+                            <p className={styles.message}>Respond to this invite by <Link to='/sign-in' className={styles.link}>Signing-In</Link></p>
+                        
                     )}
                 </div>
-            )
-            }
+            
+            )}
 
         </main>
     )

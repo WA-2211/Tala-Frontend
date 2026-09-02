@@ -18,6 +18,7 @@
 .btn{
     border: none;
     border-radius: 1rem;
+    margin-right: 0.3rem;
     padding: 0.5rem 0.7rem;
     background-color: var(--Dark-Yellow);
     color: var(--Dark-Red);
@@ -35,6 +36,7 @@
      background-color: var(--Pink-Red);
     color: var(--Light-Yellow);
     margin-right: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .btnFavorite:hover{
@@ -110,6 +112,12 @@
     font-weight: 500;
     margin-bottom: 0.5rem;
     color: var(--Pink);
+    font-weight: 700;
+}
+.reviewText{
+    text-align: left;
+    margin-left: 2rem;
+    font-size: 18px;
 }
 
 
@@ -117,4 +125,10 @@
     border: none;
     border-top: 1px solid var(--Pink);
     margin: 1.2rem ;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2rem;
 }

@@ -5,6 +5,11 @@ async function getPlanByLink(inviteLink){
     return res.data
 }
 
+async function acceptPublicInvite(inviteLink){
+    const res = await api.post('/invite/public/' + inviteLink)
+    return res.data
+}
+
 async function createInvite(planId, username){
     const res = await api.post('/plan/' + planId + '/invite', {username: username})
     return res.data
@@ -26,10 +31,12 @@ async function getMyinvites(){
     return res.data
 }
 
+
 export {
     getPlanByLink,
+    acceptPublicInvite,
     createInvite,
     getAllInvites, 
     updateInvite,
-    getMyinvites
+    getMyinvites,
 }
