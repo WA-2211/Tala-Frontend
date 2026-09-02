@@ -175,13 +175,19 @@ function Allplaces() {
             </div>
             <h1>Where To Go?</h1>
             {places.map((onePlace) =>
-                <div key={onePlace._id} className={styles.placeContainer}>
-                    <h3><Link to={`/place/${onePlace._id}`}>{onePlace.name}</Link></h3>
-                    <p className={styles.placeTags}>{onePlace.tags.join(' / ')} </p>
-                    <p>{onePlace.description}</p>
-                    <p className={styles.placePrice}><span style={{ fontWeight: '700' }}>Price Range : </span>{onePlace.priceRange.category} , <span style={{ fontFamily: 'serif' }}>{onePlace.priceRange.averageBHD}</span> BHD average</p>
+                <Link to={`/place/${onePlace._id}`} key={onePlace._id} className={styles.placeContainer}>
 
-                </div>
+
+
+                    <h3>{onePlace.name}</h3>
+                    <p>{onePlace.description}</p>
+
+                    <div className={styles.header}>
+
+                        <p className={styles.placeTags}>{onePlace.tags.join(' / ')} </p>
+                        <p className={styles.placePrice}><span style={{ fontFamily: 'serif' }}>{onePlace.priceRange.averageBHD}</span> BHD average</p>
+                    </div>
+                </Link>
             )}
         </main>
     )

@@ -2,13 +2,13 @@
     font-family: "Chelsea Market", system-ui;
     text-align: left;
     margin-left: 13rem;
-    margin-top: 2rem;
+    margin-top: 4rem;
     margin-bottom: 0;
 }
 
 .main p{
     margin-top: 0;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     font-weight: 400;
     text-align: left;
     margin-left: 14rem;
@@ -47,8 +47,19 @@ img{
     border: none;
     border-radius: 1rem;
     padding: 0.5rem;
+    margin-top: 0.3rem;
     width: 15rem;
     height: 1rem;
+    outline: none;
+    background-color: var(--Dark-Yellow);
+    
+}
+
+.formInput:focus{
+    cursor: text;
+    border-color: var(--Pink-Red);
+     box-shadow: 0 0 0 2px var(--Pink-Red); 
+
 }
 
 .formLabel {
@@ -100,6 +111,7 @@ img{
     color: var(--Light-Yellow);
     font-weight: 700;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .link:hover{

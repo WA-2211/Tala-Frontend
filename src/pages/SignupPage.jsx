@@ -54,7 +54,7 @@ function Signup() {
       <p className={styles.error}>{error}</p>
       <p>Already have an account? <span className={styles.link} onClick={() => navigate("/sign-in")}>Sign In</span></p>
       <div className={styles.content}>
-      <img src='\src\images\image1.jpg' alt="" />
+      <img src='\src\images\Logo1-removebg-preview.png' alt="Tal'a Logo" />
       <form onSubmit={handleSubmit} className={styles.formSignUp}>
         <div className={styles.formElement}>
           <label htmlFor="username" className={styles.formLabel}>Username</label>

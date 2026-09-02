@@ -12,16 +12,20 @@
     background-color: var(--Pink);
     border: none;
     border-radius: 1rem;
-    padding: 0.2rem 0.5rem;
+    padding: 0.5rem 1.25rem;
     color: var(--Dark-Pink-Red);
     border: 1px solid var(--Light-Yellow);
     align-items: flex-start;
+
 }
 
 .btnFilter:hover{
     background-color: var(--Light-Yellow);
     cursor: pointer;
 }
+
+
+
 .filterContent{
     text-align: left;
 }
@@ -72,6 +76,14 @@ margin-bottom: 1rem;
   border: 1px solid var(--Pink);
   border-radius: 1rem;
   padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+ 
+}
+
+.placeContainer:hover{
+    background-color: #B98778;
+    cursor: pointer;
 }
 
 .placeContainer h3{
@@ -79,10 +91,12 @@ margin-bottom: 1rem;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   margin-top: 0;
+  
 }
 .placeContainer h3 a{
     text-decoration: none;
-    color: var(--Light-Yellow);
+      text-decoration: none;
+  color: inherit;
 }
 
 .placeContainer h3 a:hover{
@@ -94,13 +108,21 @@ margin-bottom: 1rem;
 
 .placeTags{
     background-color: var(--Pink);
+    color: var(--Dark-Pink-Red);
     padding: 0.2rem 0.5rem;
     border-radius: 1rem;
     font-weight: 500;
 }
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
 
 .placePrice{
-    font-size: 1rem;
+    font-size: 1.4rem;
     font-weight: 500;
+    color: var(--Pink);
 }
 

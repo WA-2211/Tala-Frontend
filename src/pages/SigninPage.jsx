@@ -82,7 +82,7 @@ const SignInForm = ({}) => {
           <button className={styles.btnCancel}  onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
-      <img src="\src\images\BAHRAIN GATE.jpg" alt="" />
+      <img src="src\images\Logo1-removebg-preview.png" alt="Tal'a Logo" />
       </div>
     </main>
   );
