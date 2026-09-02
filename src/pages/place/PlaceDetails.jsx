@@ -160,6 +160,11 @@ function PlaceDetails() {
             {place && (
                 <div className={styles.placeContainer}>
                     <h1>{place.name}</h1>
+                    <p className={styles.placeRating}>★ {place.ratingAvg}.0</p>
+                    <p className={styles.placeCategory}>{place.category} . <span className={styles.placePrice}>{place.priceRange?.category}</span> . <span className={styles.placePrice}>{place.priceRange?.averageBHD}BHD average</span></p>
+                    <p className={styles.placeTags}>{place.tags?.join(' / ')}</p>
+                    <p className={styles.placeDescription}>{place.description}</p>
+
                     {user && (
                         <div className={styles.btnContainer}>
                             <button onClick={handleFavorite} className={styles.btnFavorite}>
@@ -171,11 +176,6 @@ function PlaceDetails() {
                         </div>
                     )}
                     {visitError && <p className={styles.error}>{visitError}</p>} 
-                    <p className={styles.placeCategory}>{place.category}</p>
-                    <p className={styles.placeTags}>{place.tags?.join(' / ')}</p>
-                    <p className={styles.placeDescription}>{place.description}</p>
-                    <p className={styles.placePrice}>{place.priceRange?.category} , {place.priceRange?.averageBHD}BHD average</p>
-                    <p className={styles.placeRating}>{place.ratingAvg} / 5</p>
                     {place.location?.coordinates?  (
                         <>
                     <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{height: '350px', width:'100%'}}>

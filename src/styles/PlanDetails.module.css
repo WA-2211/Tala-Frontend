@@ -3,10 +3,10 @@
 }
 
 .planContainer{
-    background-color: var(--Transparent);
     border: 1px solid var(--Pink);
     border-radius: 1rem;
     padding: 1rem;
+    margin-top: 3rem;
 }
 
 .planContainer h3{
@@ -17,6 +17,9 @@
 
 .planData{
     margin-bottom: 1rem;
+    margin-left: 1rem;
+    text-align: left;
+    font-size: 20px;
 }
 
 .btnEdit{
@@ -55,7 +58,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
@@ -68,12 +71,14 @@
 }
 
 .formInput label{
+    text-align: left;
     padding: 0.5rem;
     border-radius: 0.5rem;
     border: 1px solid var(--Pink);
 }
 
 .formInput {
+    background-color: var(--Light-Yellow);
     padding: 0.5rem;
     border-radius: 0.5rem;
     border: none;
@@ -115,13 +120,19 @@
     cursor: pointer;
 }
 
-.linkContainer{}
+.linkContainer{
+    background-color: var(--Transparent);
+    border: 1px solid var(--Pink);
+    border-radius: 1rem;
+    padding: 1rem;
+}
 .inviteLink{
     display: inline-block;
     border-radius: 1rem;
     background-color: var(--White);
-    color: var(--Pink);
+    color: var(--Dark-Pink-Red);
     font-weight: 400;
+    font-size: 20px;
     padding: 0.2rem 0.5rem;
 }
 

@@ -129,15 +129,16 @@ function PlanDetails() {
                         <h3>{plan.place.name}</h3>
                         {tagStatus(plan.status)}
                     </div>
+                    <p className={styles.planData}>{plan.scheduledDate ? `Planned on: ${ new Date(plan.scheduledDate).toLocaleDateString('en-BH', options) }`: '- No date added yet -'}</p>
+
                     <div className={styles.linkContainer}>
-                    <p style={{fontWeight:'700'}}>Invite Friends:</p>
-                    <span>
-                        <Paragraph copyable={{ text: shareUrlLink }} className={styles.inviteLink}>
-                            {shareUrlLink}
-                        </Paragraph >
-                    </span>
+                        <p style={{ fontWeight: '700', textAlign:'left', fontSize:'25px' }}>Invite Friends</p>
+                        <span>
+                            <Paragraph copyable={{ text: shareUrlLink }} className={styles.inviteLink}>
+                                {shareUrlLink}
+                            </Paragraph >
+                        </span>
                     </div>
-                    <p className={styles.planData}>Planned on: {plan.scheduledDate ? new Date(plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
                     <h3 style={{ marginTop: '1.2rem' }}>Edit Plan Details</h3>
 
                     <button className={styles.btnDelete} onClick={() => handleDeletePlan(planId)}>Delete</button>
@@ -146,7 +147,7 @@ function PlanDetails() {
                         <>
                             <form onSubmit={handlesubmit} className={styles.editForm}>
                                 <div className={styles.formElement}>
-                                    <label htmlFor='scheduledDate'>Scheduled Date:</label>
+                                    <label htmlFor='scheduledDate'>Scheduled Date</label>
                                     <input
                                         type='date'
                                         name='scheduledDate'
@@ -160,7 +161,7 @@ function PlanDetails() {
                                 </div>
 
                                 <div className={styles.formElement}>
-                                    <label htmlFor='status'>Plan Status:</label>
+                                    <label htmlFor='status'>Plan Status</label>
                                     <select
                                         name='status'
                                         id='status'

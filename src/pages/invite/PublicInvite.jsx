@@ -68,7 +68,7 @@ function PublicInvite() {
                 <div className={styles.inviteContainer}>
                     <p>{tagStatus(plan.status)}</p>
                     <h3>{plan.user.username} invited you to visit <Link to={`/place/${plan.place._id}`}>{plan.place.name}</Link></h3>
-                    <p className={styles.date}>{plan.place.scheduledDate ? new Date(plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
+                    <p className={styles.date}>{plan.scheduledDate ? `Planned on: ${new Date(plan.scheduledDate).toLocaleDateString('en-BH', options)}` : '- No date added yet -'}</p>
                     <p className={styles.description}>{plan.place.description}</p>
 
                     {!user && (
