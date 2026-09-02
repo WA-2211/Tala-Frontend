@@ -72,7 +72,7 @@ function ManagePlaces() {
                     
                     <p className={styles.tags}>{onePlace.tags.join(' / ')} </p>
                     <p className={styles.description}>{onePlace.description}</p>
-                    <p className={styles.price}>Price Range: {onePlace.priceRange.category} , {onePlace.priceRange.averageBHD}BHD average</p>
+                    <p className={styles.price}><span style={{ fontWeight: '700' }}>Price Range : </span>{onePlace.priceRange.category} , <span style={{ fontFamily: 'serif' }}>{onePlace.priceRange.averageBHD}</span>BHD average</p>
 
                 </div>
             )}

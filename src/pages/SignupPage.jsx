@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { signUp } from "../services/authService";
+import { signIn, signUp } from "../services/authService";
 import styles from '../styles/SignupPage.module.css'
+import { useAuth } from "../context/AuthContext";
 function Signup() {
   const navigate = useNavigate();
+  const {setUser} = useAuth()
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     username: "",
@@ -27,7 +29,10 @@ function Signup() {
     try {
       setSubmitting(true)
       await signUp(formData);
-      navigate('/sign-in')
+
+      const signedInUser = await signIn({email, password})
+      setUser(signedInUser)
+      navigate('/recommended')
     } catch (err) {
       setError(err.response.data.message);
       setSubmitting(false)

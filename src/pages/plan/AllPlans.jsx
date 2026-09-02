@@ -77,7 +77,7 @@ function AllPlans() {
                     return (
                         <div key={onePlan._id} className={styles.planContainer}>
                             <div className={styles.planTitle}>
-                                <h3><Link to={`/plan/${onePlan._id}`}>{onePlan.place.name}</Link></h3>
+                                <h3><Link to={`/plan/${onePlan._id}`}>{onePlan.place?.name || 'Place is not available anymore'}</Link></h3>
                                 {tagStatus(onePlan.status)}
                             </div>
                             <p className={styles.planData}>
