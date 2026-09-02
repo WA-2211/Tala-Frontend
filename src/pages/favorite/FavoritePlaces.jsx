@@ -53,7 +53,7 @@ function FavoritePlaces() {
               {favorites.length === 0 ? <p>You have not favorited any places yet - Explore Now!</p>
                         :favorites.map((oneFavorite) =>
                             <div key={oneFavorite._id} className={styles.favoritesContainer}>
-                                <h3><Link to={`/place/${oneFavorite.place._id}`}>{oneFavorite.place.name}</Link></h3>
+                                <h3><Link to={`/place/${oneFavorite.place?._id}`}>{oneFavorite.place?.name || 'Place is not available'}</Link></h3>
                                 <button onClick={() => handleRemoveFavorite(oneFavorite._id)} className={styles.btn}>Remove from Favorites</button>
                             </div>
                         )}

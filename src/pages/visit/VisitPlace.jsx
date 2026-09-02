@@ -54,9 +54,13 @@ function VisitPlace() {
             {visits.length === 0 ? <p className={styles.noVisits}>You have no visits yet - Explore Now!</p>
                 : visits.map((oneVisit) =>
                     <div key={oneVisit._id} className={styles.visitContainer}>
-                        <h3><Link to={`/place/${oneVisit.place._id}`}>{oneVisit.place.name}</Link></h3>
-                        <p className={styles.visitDate}><span style={{fontWeight: 'bold'}}>Visited on:</span> {new Date(oneVisit.visitedAt).toLocaleDateString('en-BH', options)}</p>
-                        {new Date(oneVisit.coolDownUntil) > new Date() ? <p className={styles.visitData}><span style={{fontWeight: 'bold'}}>CoolDown until:</span> {new Date(oneVisit.coolDownUntil).toLocaleDateString('en-BH', options)}</p> : <p className={styles.visitData}>This place is available to visit again</p>}
+                        <h3>
+                            {oneVisit.place ? (
+                                < Link to={`/place/${oneVisit.place._id}`}>{oneVisit.place.name}</Link>
+                            ) : ('Plac is no longer available')}
+                        </h3>
+                        <p className={styles.visitDate}><span style={{ fontWeight: 'bold' }}>Visited on:</span> {new Date(oneVisit.visitedAt).toLocaleDateString('en-BH', options)}</p>
+                        {new Date(oneVisit.coolDownUntil) > new Date() ? <p className={styles.visitData}><span style={{ fontWeight: 'bold' }}>CoolDown until:</span> {new Date(oneVisit.coolDownUntil).toLocaleDateString('en-BH', options)}</p> : <p className={styles.visitData}>This place is available to visit again</p>}
 
                     </div>
                 )}

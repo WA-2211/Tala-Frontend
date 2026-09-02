@@ -78,7 +78,12 @@ function MyInvites() {
                 : invites.map((oneInvite) => {
                     return (
                         <div key={oneInvite._id} className={styles.inviteContainer}>
-                            <h3><Link to={`/place/${oneInvite.plan.place._id}`}>{oneInvite.plan.place.name}</Link></h3>
+                            <h3>
+                                {oneInvite.place ? (
+                                    <Link to={`/place/${oneInvite.plan.place._id}`}>{oneInvite.plan.place.name}</Link>
+                                ) : ('Plac is no longer available')}
+                            </h3>
+
                             <p className={styles.date}>{oneInvite.plan.scheduledDate ? new Date(oneInvite.plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
                             {tagStatus(oneInvite.status)}
 
