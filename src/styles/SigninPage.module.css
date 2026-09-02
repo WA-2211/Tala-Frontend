@@ -27,12 +27,16 @@ img{
     object-position: center;
 }
 .SignInForm {
+    background-color:#b9877834;
     display: flex;
-    flex: 1;
+    flex: 0 1 430px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    border-radius: 2rem;
+    margin: auto;
+    margin-top: 6px;
     
 }
 

@@ -1,43 +1,46 @@
-
-.main{
+.main {
     min-height: 100vh;
 }
 
 .main h1 {
     font-family: "Chelsea Market", system-ui;
-    text-align: right;
-    margin-right: 9.5rem;
+    text-align: center;
+    margin-left: 19rem;
     margin-top: 3rem;
     margin-bottom: 0;
-    
+
 }
-.main p{
+
+.main p {
     margin-top: 0;
     margin-bottom: 0rem;
     font-weight: 400;
     text-align: right;
-    margin-right: 14rem;
+    margin-right: 20rem;
 }
-.content{
+
+.content {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     min-height: calc(100vh - 100px);
 }
 
-img{
+img {
     width: 40%;
-    height: 100%; 
+    height: 100%;
 }
 
 
 .formSignUp {
+    background-color: #b9877834;
+    border-radius: 2rem;
     display: flex;
-    flex: 1;
+    flex: 0 1 430px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
-    padding-top: 0; 
+    padding: 2rem 3rem;
+    
 
 }
 
@@ -58,12 +61,13 @@ img{
     background-color: var(--Dark-Yellow);
 }
 
-.formInput:focus{
+.formInput:focus {
     cursor: text;
     border-color: var(--Pink-Red);
-    box-shadow: 0 0 0 2px var(--Pink-Red); 
+    box-shadow: 0 0 0 2px var(--Pink-Red);
 
 }
+
 .formLabel {
     margin-bottom: 0.5rem;
     font-weight: 500;
@@ -87,12 +91,12 @@ img{
     font-weight: 700;
 }
 
-.btnSign:hover{
+.btnSign:hover {
     cursor: pointer;
-    background-color: #bd9f77 ;
+    background-color: #bd9f77;
 }
 
-.btnCancel{
+.btnCancel {
     border: none;
     border-radius: 1rem;
     padding: 0.4rem;
@@ -104,18 +108,19 @@ img{
     background-color: var(--Pink-Red);
 }
 
-.btnCancel:hover{
+.btnCancel:hover {
     cursor: pointer;
     background-color: var(--Dark-Pink-Red);
 }
 
-.link{
+.link {
     color: var(--Light-Yellow);
     font-weight: 700;
     cursor: pointer;
+    text-decoration: underline;
 }
 
-.link:hover{
+.link:hover {
     color: var(--Pink-Red);
     cursor: pointer;
 }
