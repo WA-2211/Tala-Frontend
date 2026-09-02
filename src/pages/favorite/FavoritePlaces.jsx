@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin } from 'antd'
 import { getAllFavorites, deleteFavorite } from '../../services/favoriteService'
+import styles from '../../styles/FavoritePlaces.module.css'
 
 function FavoritePlaces() {
     const navigate = useNavigate()
@@ -47,16 +48,16 @@ function FavoritePlaces() {
     </Flex>
     if (error) return <p>ERROR: {error}</p>
     return (
-        <div>
+        <main className={styles.main}>
             <h1>Your Favorite Places</h1>
               {favorites.length === 0 ? <p>You have not favorited any places yet - Explore Now!</p>
                         :favorites.map((oneFavorite) =>
-                            <div key={oneFavorite._id}>
+                            <div key={oneFavorite._id} className={styles.favoritesContainer}>
                                 <h3><Link to={`/place/${oneFavorite.place._id}`}>{oneFavorite.place.name}</Link></h3>
-                                <button onClick={() => handleRemoveFavorite(oneFavorite._id)}>Remove from Favorites</button>
+                                <button onClick={() => handleRemoveFavorite(oneFavorite._id)} className={styles.btn}>Remove from Favorites</button>
                             </div>
                         )}
-        </div>
+        </main>
     )
 }
 

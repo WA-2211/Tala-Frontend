@@ -1,0 +1,42 @@
+.main {
+    margin: 0 auto
+}
+
+.favoritesContainer{
+    background-color: var(--Transparent);
+    border: 1px solid var(--Pink);
+    border-radius: 1rem;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.favoritesContainer h3{
+    font-family: "Chelsea Market", system-ui;
+}
+
+.favoritesContainer h3 a{
+    text-decoration: none;
+    color: var(--Ligh-Yellow);
+}
+
+.favoritesContainer h3 a:hover {
+    color: var(--Pink);
+    cursor: pointer;
+}
+
+.btn{
+    background-color: var(--Pink-Red);
+    color: var(--White);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem 1rem;
+    font-weight: 400;
+}
+
+.btn:hover{
+    cursor: pointer;
+    background-color: var(--Dark-Pink-Red);
+}
