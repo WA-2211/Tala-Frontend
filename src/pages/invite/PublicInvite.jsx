@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Typography, Tag } from 'antd'
 import { getPlanByLink } from '../../services/inviteService'
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import styles from '../../styles/Publicinvite.module.css'
 
 function PublicInvite() {
     const navigate = useNavigate()
@@ -62,20 +63,20 @@ function PublicInvite() {
     if (error) return <p>ERROR: {error}</p>
 
     return (
-        <main>
+        <main className={styles.main}>
             {plan && (
-                <>
+                <div className={styles.inviteContainer}>
                     <p>{tagStatus(plan.status)}</p>
                     <h3>{plan.user.username} invited you to visit <Link to={`/place/${plan.place._id}`}>{plan.place.name}</Link></h3>
-                    <p>{plan.place.scheduledDate ? new Date(plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
-                    <p>{plan.place.description}</p>
+                    <p className={styles.date}>{plan.place.scheduledDate ? new Date(plan.scheduledDate).toLocaleDateString('en-BH', options) : '- No date added yet -'}</p>
+                    <p className={styles.description}>{plan.place.description}</p>
 
                     {!user && (
                         <>
-                            <p>Respond to this invite by <Link to='/sign-in'>Signing-In</Link></p>
+                            <p className={styles.message}>Respond to this invite by <Link to='/sign-in'>Signing-In</Link></p>
                         </>
                     )}
-                </>
+                </div>
             )
             }
 

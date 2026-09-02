@@ -1,0 +1,52 @@
+.main {
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.inviteContainer {
+    background-color: var(--Transparent);
+    border: 1px solid var(--Pink);
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+
+.inviteContainer h3 {
+    font-family: "Chelsea Market", system-ui;
+    font-size: 1.5rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.inviteContainer h3 a {
+    text-decoration: none;
+    color: var(--Light-Yellow);
+}
+
+.inviteContainer h3 a:hover {
+    color: var(--Pink);
+}
+
+.inviteDate {
+    color: var(--Dark-Yellow);
+    font-size: 0.95rem;
+}
+
+.description {
+    color: var(--White);
+    font-size: 0.95rem;
+}
+
+.message {
+    background-color: var(--Dark-Yellow);
+    color: var(--Dark-Red);
+    border-radius: 1rem;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.signInPrompt a {
+    color: var(--Dark-Pink-Red);
+    font-weight: 700;
+    text-decoration: underline;
+}
