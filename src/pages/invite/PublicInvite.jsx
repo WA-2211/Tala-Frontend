@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Typography, Tag } from 'antd'
 import { getPlanByLink, acceptPublicInvite } from '../../services/inviteService'
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
-import styles from '../../styles/Publicinvite.module.css'
+import styles from '../../styles/PublicInvite.module.css'
 
 function PublicInvite() {
     const navigate = useNavigate()
@@ -59,7 +59,7 @@ function PublicInvite() {
             setError(false)
 
             await acceptPublicInvite(inviteLink)
-            navigat('/invite')
+            navigate('/invite')
         } catch (err) {
             setError(err?.response?.data?.message)
             setJoinPlan(false)

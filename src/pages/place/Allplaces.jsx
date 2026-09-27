@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { Flex, Spin, Tag } from 'antd'
 import { getAllPlaces, getNearMePlaces } from '../../services/placeService'
-import styles from '../../styles/Allplaces.module.css'
+import styles from '../../styles/AllPlaces.module.css'
 
 function Allplaces() {
 
